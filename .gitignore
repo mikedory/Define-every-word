@@ -1,0 +1,7 @@
+bin
+build
+include
+lib
+*.pyc
+.DS_Store
+.svn
