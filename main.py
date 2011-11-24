@@ -13,6 +13,25 @@ import unicodedata
 from tornado.options import define, options
 define("port", default=5000, help="run on the given port", type=int)
 
+# twitter
+
+from random import choice
+import time
+
+from twitter import Twitter, NoAuth, OAuth, read_token_file
+# from twitter.cmdline import CONSUMER_KEY, CONSUMER_SECRET
+noauth = NoAuth()
+# oauth = OAuth(*read_token_file('tests/oauth_creds')
+#                + (CONSUMER_KEY, CONSUMER_SECRET))
+
+# twitter = Twitter(domain='api.twitter.com',
+#                   auth=oauth,
+#                   api_version='1')
+
+twitter_na = Twitter(domain='api.twitter.com', auth=noauth, api_version='1')
+updates = twitter_na.statuses.user_timeline(screen_name="everyword")
+
+
 # application settings and handle mapping info
 class Application(tornado.web.Application):
 	def __init__(self):
@@ -43,6 +62,9 @@ class MainHandler(tornado.web.RequestHandler):
 			google_analytics_id=google_analytics_id,
 			url=url
 		)
+
+	def grab_latest_word():
+		pass
 
 
 # RAMMING SPEEEEEEED!
