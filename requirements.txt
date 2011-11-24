@@ -2,3 +2,4 @@ Tornado==2.1.1
 Moka==0.0.5
 Twitter==1.7.1
 Simplejson==2.2.1
+Redis=2.4.10
