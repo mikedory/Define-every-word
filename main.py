@@ -50,18 +50,9 @@ class BaseHandler(tornado.web.RequestHandler):
 
 	def grab_twitter_updates(self):
 		from twitter import Twitter, NoAuth, OAuth, read_token_file
-		# twitter
-		# from twitter.cmdline import CONSUMER_KEY, CONSUMER_SECRET
 		noauth = NoAuth()
-		# oauth = OAuth(*read_token_file('tests/oauth_creds')
-		#                + (CONSUMER_KEY, CONSUMER_SECRET))
-
-		# twitter = Twitter(domain='api.twitter.com',
-		#                   auth=oauth,
-		#                   api_version='1')
-
 		twitter_na = Twitter(domain='api.twitter.com', auth=noauth, api_version='1')
-		updates = twitter_na.statuses.user_timeline(screen_name="everyword")
+		return twitter_na.statuses.user_timeline(screen_name="everyword")
 
 
 
