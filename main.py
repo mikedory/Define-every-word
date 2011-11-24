@@ -66,25 +66,13 @@ class MainHandler(BaseHandler):
 
 		# oh hai redis
 		db = self.get_redis_conn()
-		defaults = set_db_defaults()
-		
-		# teh twitter
-		updates = grab_twitter_updates()
-
-
-		db.sadd("twitter:checks",datetime.now())
-		print db.llen("twitter:checks")
-
-		db.incr("twitter:checkcount")
-
-		key = "%s:friends" % (self.current_user['access_token'])
-		lastCall = db.get(key)
+		word = 
 
 		self.render(
-			"main.html",
+			"home.html",
 			page_heading='Hi!',
 			google_analytics_id=google_analytics_id,
-			url=url
+			word=word
 		)
 
 
