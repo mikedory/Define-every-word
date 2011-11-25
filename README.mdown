@@ -1,0 +1,9 @@
+# define(@everyword)
+
+## Wait, what?
+
+This is a very simple web app that just grabs the latest word tweeted by <a href="http://twitter.com/aparrish">@aparrish</a>'s <a href="http://twitter.com/everyword">@everyword</a> and shows a definition.
+
+## So I'm a nerd.  Can you tell me the nerdy stuff?
+
+Sure!  This was built with Python on Tornado using Redis as a data store and assuming Heroku for deployment.
