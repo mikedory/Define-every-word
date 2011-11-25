@@ -14,6 +14,8 @@ import tornado.options
 import tornado.web
 import unicodedata
 
+import tweet_grabber
+
 # import and define tornado-y things
 from tornado.options import define, options
 define("port", default=5000, help="run on the given port", type=int)
