@@ -14,7 +14,9 @@ import tornado.options
 import tornado.web
 import unicodedata
 
+# mah files
 import tweet_grabber
+import dictionary
 
 # import and define tornado-y things
 from tornado.options import define, options
@@ -61,6 +63,7 @@ class MainHandler(BaseHandler):
 		lastTweetID = db.lindex("tweets:tweet_ids", 0)
 		lastUpdateJSON = db.get("tweets:%s" % lastTweetID)
 		lastUpdate = json.loads(lastUpdateJSON)
+		lastUpdateDefinitions = dictionary.define_word(lastUpdate["text"])
 
 		self.render(
 			"home.html",
