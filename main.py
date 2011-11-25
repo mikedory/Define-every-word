@@ -19,9 +19,9 @@ import tweet_grabber
 # import and define tornado-y things
 from tornado.options import define, options
 define("port", default=5000, help="run on the given port", type=int)
-# define("redis_host", help="hostname for redis", default="localhost", type=str) # set to localhost for local use
-# define("redis_port", help="port number for redis", default=6379, type=int) # set to 6379 for local use
-# define("redis_pass", help="password number for redis", default=6379, type=int) # set to 6379 for local use
+define("redis_host", help="hostname for redis", default="localhost", type=str) # set to localhost for local use
+define("redis_port", help="port number for redis", default=6379, type=int) # set to 6379 for local use
+define("redis_pass", help="password number for redis", default=None, type=int) # set to None for local use
 
 
 # application settings and handle mapping info
@@ -38,13 +38,10 @@ class Application(tornado.web.Application):
 		tornado.web.Application.__init__(self, handlers, **settings)
 
 
-
 class BaseHandler(tornado.web.RequestHandler):
-
 	def get_redis_conn(self):
 		url = urlparse(os.environ.get('REDISTOGO_URL'))
 		return redis.Redis(host=url.hostname, port=url.port, password=url.password)
-
 
 
 # the main page
@@ -55,6 +52,8 @@ class MainHandler(BaseHandler):
 		else:
 			google_analytics_id = False
 
+		# update the twittorz
+		# just to check it's all up to date, really
 		tweet_grabber.grab_all_the_things()
 
 		# oh hai redis
@@ -69,6 +68,7 @@ class MainHandler(BaseHandler):
 			google_analytics_id=google_analytics_id,
 			lastUpdate=lastUpdate
 		)
+
 
 
 # RAMMING SPEEEEEEED!

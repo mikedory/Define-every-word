@@ -45,3 +45,6 @@ def grab_all_the_things():
 		db.lpush("tweets:tweet_ids", lastUpdate["id"])
 		db.ltrim("tweets:tweet_ids", 0, 99)
 		print("Tweet saved at %s" % datetime.now())
+
+if __name__ == "__main__":
+	grab_all_the_things()
