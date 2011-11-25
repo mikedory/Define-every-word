@@ -50,7 +50,7 @@ body {
 		font-family: 'Mate', serif;
 	}
 
-#container
+#defintion_container
 {  
     position: relative;  
     width: 500px;  
@@ -62,7 +62,7 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);  
 }  
 
-	#container:before, #container:after  
+	#defintion_container:before, #container:after  
 	{  
 	    position: absolute;  
 	    width: 40%;  
@@ -81,7 +81,7 @@ body {
 	    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);  
 	    z-index: -1;  
 	}  
-	#container:after  
+	#defintion_container:after  
 	{  
 	    left: auto;  
 	    right: 12px;  

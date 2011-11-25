@@ -24,5 +24,3 @@ def define_word(word):
 	except URLError, e:
 		print e.code
 		print e.read()
-
-boop = define_word('hello')

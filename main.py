@@ -49,6 +49,7 @@ class BaseHandler(tornado.web.RequestHandler):
 # the main page
 class MainHandler(BaseHandler):
 	def get(self, q):
+		# yay analytics
 		if os.environ.has_key('GOOGLEANALYTICSID'):
 			google_analytics_id = os.environ['GOOGLEANALYTICSID']
 		else:
@@ -63,15 +64,17 @@ class MainHandler(BaseHandler):
 		lastTweetID = db.lindex("tweets:tweet_ids", 0)
 		lastUpdateJSON = db.get("tweets:%s" % lastTweetID)
 		lastUpdate = json.loads(lastUpdateJSON)
+
+		# define that word!
 		lastUpdateDefinitions = dictionary.define_word(lastUpdate["text"])
 
+		# render it up!
 		self.render(
 			"home.html",
-			page_heading = 'Hi!',
+			page_heading = 'define(everyword)',
 			google_analytics_id = google_analytics_id,
 			lastUpdate = lastUpdate,
 			lastUpdateDefinitions = lastUpdateDefinitions
-
 		)
 
 

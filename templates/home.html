@@ -5,10 +5,12 @@
 {% end %}
 
 {% block body %}
-	<p>{{ lastUpdate['id'] }}</p>
-	<p>{{ lastUpdate['created_at'] }}</p>
-	<p>{{ lastUpdate['text'] }}</p>
-	<p>{{ lastUpdateDefinitions[0] }}</p>
+	<div id="defintion_container">
+		<p>{{ lastUpdate['id'] }}</p>
+		<p>{{ lastUpdate['created_at'] }}</p>
+		<p>{{ lastUpdate['text'] }}</p>
+		<p>{{ lastUpdateDefinitions[0] }}</p>
+	</div>
 {% end %}
 
 {% block footer %}
