@@ -70,7 +70,7 @@ class MainHandler(BaseHandler):
 
 		# render it up!
 		self.render(
-			"home.html",
+			"main.html",
 			page_heading = 'define(everyword)',
 			google_analytics_id = google_analytics_id,
 			lastUpdate = lastUpdate,

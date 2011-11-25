@@ -7,7 +7,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Heroku Funtimes</title>
+	<title>define(@everyword)</title>
 	<link rel="stylesheet" href="{{ static_url("css/style.css") }}" />
 	<script src="{{ static_url("js/modernizr-1.5.min.js") }}"></script>
 	<link href='http://fonts.googleapis.com/css?family=Mate:400,400italic' rel='stylesheet' type='text/css'>
@@ -15,13 +15,17 @@
 <body>
 
 	<header>
-		{% block header %} {% end %}
+		<h1>define(@everyword)</h1>
 	</header><!-- end header -->
 
 	<div id="main">
 		<div id="container">
-			<h1>{{ page_heading }}</h1>
-			{% block body %} {% end %}
+			<div id="defintion_container">
+				<p>{{ lastUpdate['id'] }}</p>
+				<p>{{ lastUpdate['created_at'] }}</p>
+				<p>{{ lastUpdate['text'] }}</p>
+				<p>{{ lastUpdateDefinitions[0] }}</p>
+			</div>		
 		</div><!-- end container -->
 	</div><!-- end main -->
 
