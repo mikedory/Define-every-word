@@ -23,8 +23,11 @@ time, mark, audio, video {
 }									
 
 
-/* main */
+/* basic things */
 body {
+	font-family: 'Mate', serif;
+
+	/*** start fancy gradient ***/
 	background-color: #bdd2e1;
 	background-image: -webkit-gradient(linear, left center, right center, from(rgb(189, 210, 225)), to(rgb(240, 242, 242)));
 	background-image: -webkit-linear-gradient(left, rgb(189, 210, 225), rgb(240, 242, 242));
@@ -33,23 +36,30 @@ body {
 	background-image: -ms-linear-gradient(left, rgb(189, 210, 225), rgb(240, 242, 242));
 	background-image: linear-gradient(left, rgb(189, 210, 225), rgb(240, 242, 242));
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#bdd2e1', EndColorStr='#f0f2f2');
+	/*** end fancy gradient ***/
 }
 
-header {
-	margin: 40px;
-	position: relative;
-	margin: 0 auto;  
+a {
+	text-decoration: none;
+	color: #A1CAF1;
+}
 
+/* header things */
+
+header {
+	margin: 20px;
+	padding: 20px;
+	margin: 0 auto;  
 }
 
 	header h1 {
-		color: #999;
+		color: #333;
 		font-style: italic;
-		font-family: 'Mate', serif;
 		font-size: 26px;
 		text-align: center;
 	}
 
+/* main things */
 
 #main {
 	margin: 40px;
@@ -58,12 +68,10 @@ header {
 	#main h1 {
 		color: #999;
 		font-style: italic;
-		font-family: 'Mate', serif;
 	}
 
 	#main p {
 		color: #555;
-		font-family: 'Mate', serif;
 	}
 
 #defintion_container
@@ -107,3 +115,33 @@ header {
 	    -o-transform: skew(5deg) rotate(5deg);  
 	    transform: skew(5deg) rotate(5deg);  
 	}  
+
+		#defintion_container .defined_word {
+			font-size: 40px;
+			margin: 0 0 25px 0;
+		}
+
+		#defintion_container .definition {
+			font-style: italic;
+		}
+
+		#defintion_container .details {
+			font-size: 12px;
+			margin: 60px 0 10px 0;
+		}
+
+
+/* footer thingss */
+
+footer {
+	margin: 20px;
+	padding: 20px;
+	margin: 0 auto;  
+}
+
+	footer p {
+		color: #999;
+		font-style: italic;
+		font-size: 12px;
+		text-align: center;
+	}
