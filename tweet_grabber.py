@@ -2,8 +2,8 @@
 import os.path, os, sys
 from urlparse import urlparse
 from datetime import datetime, date, time
-
 import redis
+import json
 
 def get_redis_conn():
 	url = urlparse(os.environ.get('REDISTOGO_URL'))
@@ -33,3 +33,24 @@ lastUpdate = updates[0]
 print lastUpdate["created_at"]
 print lastUpdate["id"]
 print lastUpdate["text"]
+
+
+datters = db.get("tweets:%s" % lastUpdate["id"])
+if datters:
+	print "SAME TWEET"
+else:
+	print "NEW TWEET"
+	# json = json.dumps(lastUpdate)
+	db.set(("tweets:%s" % lastUpdate["id"]), json.dumps(lastUpdate))
+	db.lpush("tweets:tweet_ids", lastUpdate["id"])
+	db.ltrim("tweets:tweet_ids", 0, 99)
+
+
+
+
+
+# db.rpush(
+# 	{
+# 		"tweets:%s:"
+# 	}
+# )

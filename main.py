@@ -3,7 +3,9 @@ import os.path, os, sys
 from urlparse import urlparse
 from datetime import datetime, date, time
 
+import json
 import redis
+import logging
 
 import tornado.escape
 import tornado.httpserver
@@ -40,19 +42,6 @@ class BaseHandler(tornado.web.RequestHandler):
 	def get_redis_conn(self):
 		url = urlparse(os.environ.get('REDISTOGO_URL'))
 		return redis.Redis(host=url.hostname, port=url.port, password=url.password)
-		# return redis.Redis(host=options.redis_host, port=options.redis_port, db=0)
-
-	def set_db_defaults(self, db):
-		# default key-cheking
-		db.setnx("user:checkcount",0)
-		db.setnx("user:lastcheck",datetime.now())
-		db.setnx("checks",0)
-
-	def grab_twitter_updates(self):
-		from twitter import Twitter, NoAuth, OAuth, read_token_file
-		noauth = NoAuth()
-		twitter_na = Twitter(domain='api.twitter.com', auth=noauth, api_version='1')
-		return twitter_na.statuses.user_timeline(screen_name="everyword")
 
 
 
@@ -66,13 +55,15 @@ class MainHandler(BaseHandler):
 
 		# oh hai redis
 		db = self.get_redis_conn()
-		word = 
+		lastTweetID = db.lindex("tweets:tweet_ids", 0)
+		lastUpdateJSON = db.get("tweets:%s" % lastTweetID)
+		lastUpdate = json.loads(lastUpdateJSON)
 
 		self.render(
 			"home.html",
 			page_heading='Hi!',
 			google_analytics_id=google_analytics_id,
-			word=word
+			lastUpdate=lastUpdate
 		)
 
 
