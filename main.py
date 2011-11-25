@@ -67,9 +67,11 @@ class MainHandler(BaseHandler):
 
 		self.render(
 			"home.html",
-			page_heading='Hi!',
-			google_analytics_id=google_analytics_id,
-			lastUpdate=lastUpdate
+			page_heading = 'Hi!',
+			google_analytics_id = google_analytics_id,
+			lastUpdate = lastUpdate,
+			lastUpdateDefinitions = lastUpdateDefinitions
+
 		)
 
 

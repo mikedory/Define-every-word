@@ -26,5 +26,3 @@ def define_word(word):
 		print e.read()
 
 boop = define_word('hello')
-print boop
-print boop[0]
