@@ -23,7 +23,6 @@
 			<div id="defintion_container">
 				<p class="defined_word">{{ lastUpdate['text'] }}</p>
 				{% set counter=0 %}
-				{{lastUpdateDefinitions}}
 				{% for definitions in lastUpdateDefinitions %}
 					{% set counter+=1%}
 					<p class="definition">{{ counter }}: {{ lastUpdateDefinitions }}</p>
