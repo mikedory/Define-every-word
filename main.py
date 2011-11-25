@@ -56,7 +56,7 @@ class MainHandler(BaseHandler):
 
 		# update the twittorz
 		# just to check it's all up to date, really
-		tweet_grabber.grab_all_the_things()
+		# tweet_grabber.grab_all_the_things()
 
 		# oh hai redis
 		db = self.get_redis_conn()
