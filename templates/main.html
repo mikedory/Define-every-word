@@ -7,7 +7,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>define(@everyword)</title>
+	<title>define(@{{ watched_bot }})</title>
 	<link rel="stylesheet" href="{{ static_url("css/style.css") }}" />
 	<script src="{{ static_url("js/modernizr-1.5.min.js") }}"></script>
 	<link href='http://fonts.googleapis.com/css?family=Mate:400,400italic' rel='stylesheet' type='text/css'>
@@ -21,16 +21,20 @@
 	<div id="main">
 		<div id="container">
 			<div id="defintion_container">
-				<p>{{ lastUpdate['created_at'] }}</p>
-				<p>{{ lastUpdate['text'] }}</p>
-				<p>{{ lastUpdateDefinitions[0] }}</p>
-				<p> From <a href="">{{ lastUpdate['id'] }}</p>
+				<p class="defined_word">{{ lastUpdate['text'] }}</p>
+				{% set counter=0 %}
+				{{lastUpdateDefinitions}}
+				{% for definitions in lastUpdateDefinitions %}
+					{% set counter+=1%}
+					<p class="definition">{{ counter }}: {{ lastUpdateDefinitions }}</p>
+				{% end %}
+				<p class="details">From <a href="http://www.twitter.com/{{ watched_bot }}">@{{ watched_bot }}</a> at <a href="http://www.twitter.com/{{ watched_bot }}/statuses/{{ lastUpdate['id'] }}">{{ lastUpdate['created_at'] }}</a></p>
 			</div>		
 		</div><!-- end container -->
 	</div><!-- end main -->
 
 	<footer>
-		{% block footer %} {% end %}
+		<p>Just definin'<a href="http://www.twitter.com/{{ watched_bot }}">@{{ watched_bot }}</a>.</p>
 	</footer><!-- end footer -->
 
 	<!-- Load jQuery -->

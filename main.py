@@ -76,6 +76,7 @@ class MainHandler(BaseHandler):
 			"main.html",
 			page_heading = 'define(everyword)',
 			google_analytics_id = google_analytics_id,
+			watched_bot = options.watched_bot,
 			lastUpdate = lastUpdate,
 			lastUpdateDefinitions = lastUpdateDefinitions
 		)
