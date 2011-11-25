@@ -32,7 +32,7 @@ defaults = set_db_defaults(db)
 updates = grab_twitter_updates()
 lastUpdate = updates[0]
 
-logging.info ("Last update timestamp: %s" % lastUpdate["created_at"])
+print ("Last update timestamp: %s" % lastUpdate["created_at"])
 logging.info ("Last update id: %s" % lastUpdate["id"])
 logging.info ("Last update text: %s" % lastUpdate["text"])
 
