@@ -4,7 +4,6 @@ from urlparse import urlparse
 from datetime import datetime, date, time
 import redis
 import json
-import logging
 
 def get_redis_conn():
 	url = urlparse(os.environ.get('REDISTOGO_URL'))
@@ -33,16 +32,16 @@ updates = grab_twitter_updates()
 lastUpdate = updates[0]
 
 print ("Last update timestamp: %s" % lastUpdate["created_at"])
-logging.info ("Last update id: %s" % lastUpdate["id"])
-logging.info ("Last update text: %s" % lastUpdate["text"])
+print ("Last update id: %s" % lastUpdate["id"])
+print ("Last update text: %s" % lastUpdate["text"])
 
 
 datters = db.get("tweets:%s" % lastUpdate["id"])
 if datters:
-	logging.info("Same tweet. Carry on.")
+	print("Same tweet. Carry on.")
 else:
-	logging.info("NEW TWEET!")
-	# json = json.dumps(lastUpdate)
+	print("NEW TWEET!")
 	db.set(("tweets:%s" % lastUpdate["id"]), json.dumps(lastUpdate))
 	db.lpush("tweets:tweet_ids", lastUpdate["id"])
 	db.ltrim("tweets:tweet_ids", 0, 99)
+	print("Tweet saved at %s" % datetime.now())
