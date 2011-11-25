@@ -24,9 +24,70 @@ time, mark, audio, video {
 
 
 /* main */
-
-#main {
-
+body {
+	background-color: #bdd2e1;
+	background-image: -webkit-gradient(linear, left center, right center, from(rgb(189, 210, 225)), to(rgb(240, 242, 242)));
+	background-image: -webkit-linear-gradient(left, rgb(189, 210, 225), rgb(240, 242, 242));
+	background-image: -moz-linear-gradient(left, rgb(189, 210, 225), rgb(240, 242, 242));
+	background-image: -o-linear-gradient(left, rgb(189, 210, 225), rgb(240, 242, 242));
+	background-image: -ms-linear-gradient(left, rgb(189, 210, 225), rgb(240, 242, 242));
+	background-image: linear-gradient(left, rgb(189, 210, 225), rgb(240, 242, 242));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#bdd2e1', EndColorStr='#f0f2f2');
 }
 
+#main {
+	margin: 40px;
+}
 
+	#main h1 {
+		color: #999;
+		font-style: italic;
+		font-family: 'Mate', serif;
+	}
+
+	#main p {
+		color: #555;
+		font-family: 'Mate', serif;
+	}
+
+#container
+{  
+    position: relative;  
+    width: 500px;  
+    padding: 50px;  
+    margin: 0 auto;  
+    background-color: #fff;  
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);  
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);  
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);  
+}  
+
+	#container:before, #container:after  
+	{  
+	    position: absolute;  
+	    width: 40%;  
+	    height: 10px;  
+	    content: ' ';  
+	    left: 12px;  
+	    bottom: 12px;  
+	    background: transparent;  
+	    -webkit-transform: skew(-5deg) rotate(-5deg);  
+	    -moz-transform: skew(-5deg) rotate(-5deg);  
+	    -ms-transform: skew(-5deg) rotate(-5deg);  
+	    -o-transform: skew(-5deg) rotate(-5deg);  
+	    transform: skew(-5deg) rotate(-5deg);  
+	    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);  
+	    -moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);  
+	    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);  
+	    z-index: -1;  
+	}  
+	#container:after  
+	{  
+	    left: auto;  
+	    right: 12px;  
+	    -webkit-transform: skew(5deg) rotate(5deg);  
+	    -moz-transform: skew(5deg) rotate(5deg);  
+	    -ms-transform: skew(5deg) rotate(5deg);  
+	    -o-transform: skew(5deg) rotate(5deg);  
+	    transform: skew(5deg) rotate(5deg);  
+	}  
