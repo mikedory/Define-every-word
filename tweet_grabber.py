@@ -22,26 +22,26 @@ def grab_twitter_updates():
 	twitter_na = Twitter(domain='api.twitter.com', auth=noauth, api_version='1')
 	return twitter_na.statuses.user_timeline(screen_name="everyword")
 	
+def grab_all_the_things():
+	# oh hai redis
+	db = get_redis_conn()
+	defaults = set_db_defaults(db)
 
-# oh hai redis
-db = get_redis_conn()
-defaults = set_db_defaults(db)
+	# teh twitter
+	updates = grab_twitter_updates()
+	lastUpdate = updates[0]
 
-# teh twitter
-updates = grab_twitter_updates()
-lastUpdate = updates[0]
-
-print ("Last update timestamp: %s" % lastUpdate["created_at"])
-print ("Last update id: %s" % lastUpdate["id"])
-print ("Last update text: %s" % lastUpdate["text"])
+	print ("Last update timestamp: %s" % lastUpdate["created_at"])
+	print ("Last update id: %s" % lastUpdate["id"])
+	print ("Last update text: %s" % lastUpdate["text"])
 
 
-datters = db.get("tweets:%s" % lastUpdate["id"])
-if datters:
-	print("Same tweet. Carry on.")
-else:
-	print("NEW TWEET!")
-	db.set(("tweets:%s" % lastUpdate["id"]), json.dumps(lastUpdate))
-	db.lpush("tweets:tweet_ids", lastUpdate["id"])
-	db.ltrim("tweets:tweet_ids", 0, 99)
-	print("Tweet saved at %s" % datetime.now())
+	datters = db.get("tweets:%s" % lastUpdate["id"])
+	if datters:
+		print("Same tweet. Carry on.")
+	else:
+		print("NEW TWEET!")
+		db.set(("tweets:%s" % lastUpdate["id"]), json.dumps(lastUpdate))
+		db.lpush("tweets:tweet_ids", lastUpdate["id"])
+		db.ltrim("tweets:tweet_ids", 0, 99)
+		print("Tweet saved at %s" % datetime.now())

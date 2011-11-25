@@ -53,6 +53,8 @@ class MainHandler(BaseHandler):
 		else:
 			google_analytics_id = False
 
+		grab_all_the_things()
+
 		# oh hai redis
 		db = self.get_redis_conn()
 		lastTweetID = db.lindex("tweets:tweet_ids", 0)
