@@ -62,7 +62,7 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);  
 }  
 
-	#defintion_container:before, #container:after  
+	#defintion_container:before, #defintion_container:after  
 	{  
 	    position: absolute;  
 	    width: 40%;  
