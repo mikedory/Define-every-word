@@ -38,7 +38,7 @@ print ("Last update text: %s" % lastUpdate["text"])
 
 datters = db.get("tweets:%s" % lastUpdate["id"])
 if datters:
-	print("Same tweet. Carry on.")
+	sys.stdout("Same tweet. Carry on.")
 else:
 	print("NEW TWEET!")
 	db.set(("tweets:%s" % lastUpdate["id"]), json.dumps(lastUpdate))
