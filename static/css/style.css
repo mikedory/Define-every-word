@@ -35,6 +35,21 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#bdd2e1', EndColorStr='#f0f2f2');
 }
 
+header {
+	margin: 40px;
+	position: relative;
+	margin: 0 auto;  
+
+}
+
+	header h1 {
+		color: #999;
+		font-style: italic;
+		font-family: 'Mate', serif;
+		font-size: 26px;
+	}
+
+
 #main {
 	margin: 40px;
 }
