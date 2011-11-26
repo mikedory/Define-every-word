@@ -14,10 +14,19 @@ def define_word(word):
 		lookup = ast.literal_eval(body)
 		counter = 0
 		if lookup.has_key("webDefinitions"):
-			definitions = lookup["webDefinitions"][0]["entries"]
-			for definition in definitions:	
-				if definition["type"] == "meaning":
-					string = urllib.unquote(definition['terms'][counter]['text'])
+			defined_words = 
+			definition_heads = lookup["webDefinitions"][0]["headword"]
+			for head in definition_heads:	
+				if head["type"] == "meaning":
+					string = urllib.unquote(head['terms'][counter]['text'])
+					defined_words.append(string)
+					++counter
+				else:
+					pass
+			definition_entries = lookup["webDefinitions"][0]["entries"]
+			for entry in definition_entries:	
+				if entry["type"] == "meaning":
+					string = urllib.unquote(entry['terms'][counter]['text'])
 					defined_words.append(string)
 					++counter
 				else:

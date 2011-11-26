@@ -7,3 +7,7 @@ This is a very simple web app that just grabs the latest word tweeted by <a href
 ## So I'm a nerd.  Can you tell me the nerdy stuff?
 
 Sure!  This was built with Python on Tornado using Redis as a data store and assuming Heroku for deployment.
+
+## Credits
+
+I took a bunch of hints on how to do the Google dictionary parsing from a script written by [Sridarshan Shetty](http://twitter.com/sridarshan), and [Adam Parrish](http://twitter.coma/parrish)'s [Mimetree](https://github.com/aparrish/mimetree/) is a great into to Redis for this ind of stuff.
