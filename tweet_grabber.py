@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os.path, os, sys
 from urlparse import urlparse
-from datetime import datetime, date, time
+import datetime, time
 import redis
 import json
 
@@ -14,7 +14,7 @@ def get_redis_conn():
 
 def set_db_defaults(db):
 	count = db.setnx("user:checkcount",0)
-	lastcheck = db.setnx("user:lastcheck",datetime.now())
+	lastcheck = db.setnx("user:lastcheck",datetime.datetime.now())
 	checks = db.setnx("checks",0)
 	return checks
 
@@ -33,8 +33,12 @@ def grab_all_the_things():
 	# teh twitter
 	updates = grab_twitter_updates()
 	lastUpdate = updates[0]
+	timestampsting = lastUpdate["created_at"] + ' UTC'
+	timestamp = time.mktime(time.strptime(timestampsting,  '%a  %b %d %H:%M:%S +0000 %Y %Z'))
+	lastUpdate["timestamp"] = timestamp
 
-	print ("Last update timestamp: %s" % lastUpdate["created_at"])
+	print ("Last update created_at: %s" % lastUpdate["created_at"])
+	print ("Last update timestamp: %s" % lastUpdate["timestamp"])
 	print ("Last update id: %s" % lastUpdate["id"])
 	print ("Last update text: %s" % lastUpdate["text"])
 
@@ -47,7 +51,7 @@ def grab_all_the_things():
 		db.set(("tweets:%s" % lastUpdate["id"]), json.dumps(lastUpdate))
 		db.lpush("tweets:tweet_ids", lastUpdate["id"])
 		db.ltrim("tweets:tweet_ids", 0, 99)
-		print("Tweet saved at %s" % datetime.now())
+		print("Tweet saved at %s" % datetime.datetime.now())
 
 if __name__ == "__main__":
 	grab_all_the_things()
