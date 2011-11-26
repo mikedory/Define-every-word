@@ -71,12 +71,17 @@ class MainHandler(BaseHandler):
 		# define that word!
 		lastDefinition = dictionary.define_word(lastUpdate["text"])
 
+		if os.environ.has_key('WATCHED_BOT'):
+			watched_bot = os.environ['WATCHED_BOT']
+		else:
+			watched_bot = options.watched_bot
+
 		# render it up!
 		self.render(
 			"main.html",
 			page_heading = 'define(everyword)',
 			google_analytics_id = google_analytics_id,
-			watched_bot = options.watched_bot,
+			watched_bot = watched_bot,
 			lastUpdate = lastUpdate,
 			lastDefinition = lastDefinition
 		)
