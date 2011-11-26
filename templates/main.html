@@ -23,9 +23,9 @@
 			<div id="defintion_container">
 				<p class="defined_word">{{ lastUpdate['text'] }}</p>
 
-				<p>noun</p>
+				<p class="part_of_speech">{{ lastDefinition }}</p>
 				{% set counter=0 %}
-				{% for definitions in lastUpdateDefinitions %}
+				{% for definitions in lastDefinition['definitions'] %}
 					{% set counter+=1%}
 					<p class="definition">{{ counter }}: {% raw definitions %}</p>
 				{% end %}
