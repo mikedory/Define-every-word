@@ -53,9 +53,9 @@ header {
 }
 
 	header h1 {
-		color: #333;
-		font-style: italic;
-		font-size: 26px;
+		color: #777;
+		/*font-style: italic;*/
+		font-size: 56px;
 		text-align: center;
 	}
 
@@ -123,6 +123,7 @@ header {
 
 		#defintion_container .definition {
 			font-style: italic;
+			margin: 0 auto 15px auto;
 		}
 
 		#defintion_container .details {
