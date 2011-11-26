@@ -69,7 +69,7 @@ class MainHandler(BaseHandler):
 		lastUpdate = json.loads(lastUpdateJSON)
 
 		# define that word!
-		lastUpdateDefinitions = dictionary.define_word(lastUpdate["text"])
+		lastDefinition = dictionary.define_word(lastUpdate["text"])
 
 		# render it up!
 		self.render(
@@ -78,7 +78,7 @@ class MainHandler(BaseHandler):
 			google_analytics_id = google_analytics_id,
 			watched_bot = options.watched_bot,
 			lastUpdate = lastUpdate,
-			lastUpdateDefinitions = lastUpdateDefinitions
+			lastDefinition = lastDefinition
 		)
 
 
