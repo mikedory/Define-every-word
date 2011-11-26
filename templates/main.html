@@ -23,16 +23,27 @@
 			<div id="defintion_container">
 				<p class="defined_word">{{ lastUpdate['text'] }}</p>
 				<div class="pronunciation">
-					<span class="part_of_speech">{% if lastDefinition['part_of_speech'] is not None %}{{ lastDefinition['part_of_speech'] }}{% end %}</span>
-					<span class="pronunciation_phonetic">{{ lastDefinition['pronunciation_phonetic'] }}</span>
-					<span class="pronunciation_audio"><a href="{{ lastDefinition['pronunciation_audio'] }}"><img src="{{ static_url("images/speaker_icon-20.png") }}" width="12px" height="12px"></a></span>
+					<span class="part_of_speech">
+						{% if lastDefinition['part_of_speech'] is not None %}
+							{{ lastDefinition['part_of_speech'] }}
+						{% end %}
+					</span>
+					<span class="pronunciation_phonetic">
+						{{ lastDefinition['pronunciation_phonetic'] }}
+					</span>
+					<span class="pronunciation_audio">
+						<a href="{{ lastDefinition['pronunciation_audio'] }}">
+							<img src="{{ static_url("images/speaker_icon-20.png") }}" width="12px" height="12px">
+						</a>
+					</span>
 				</div>
+
 				{% set counter=0 %}
 				{% for definitions in lastDefinition['definitions'] %}
 					{% set counter+=1%}
 					<p class="definition">{{ counter }}: {% raw definitions %}</p>
 				{% end %}
-				<p class="details timeago">From <a href="http://www.twitter.com/{{ watched_bot }}">@{{ watched_bot }}</a> at <a class="timeago" href="http://www.twitter.com/{{ watched_bot }}/statuses/{{ lastUpdate['id'] }}">{{ locale.format_date(lastUpdate['timestamp'], gmt_offset=0, relative=True) }}</a></p>
+				<p class="details timeago">- from <a href="http://www.twitter.com/{{ watched_bot }}">@{{ watched_bot }}</a> about <a class="timeago" href="http://www.twitter.com/{{ watched_bot }}/statuses/{{ lastUpdate['id'] }}">{{ locale.format_date(lastUpdate['timestamp'], gmt_offset=0, relative=True) }}</a></p>
 			</div>		
 		</div><!-- end container -->
 	</div><!-- end main -->
