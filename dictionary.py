@@ -20,9 +20,9 @@ def define_word(word):
 		if lookup.has_key("primaries"):
 			definition_heads = lookup["primaries"]
 			terms = definition_heads[0]['terms']
-			definition_data['part_of_speech'] = terms[0]['labels']
-			definition_data['language'] = terms[1]
-			definition_data['pronunciation'] = terms[2]
+			definition_data['part_of_speech'] = terms[0]['labels'][0]['text']
+			definition_data['pronunciation_phonetic'] = terms[1]['text']
+			definition_data['pronunciation_audio'] = terms[2]['text']
 		
 		# grab all the defnitions associated with the word
 		if lookup.has_key("webDefinitions"):
