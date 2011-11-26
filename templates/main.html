@@ -25,7 +25,7 @@
 				{% set counter=0 %}
 				{% for definitions in lastUpdateDefinitions %}
 					{% set counter+=1%}
-					<p class="definition">{{ counter }}: {% definitions %}</p>z
+					<p class="definition">{{ counter }}: {% raw definitions %}</p>z
 				{% end %}
 				<p class="details">From <a href="http://www.twitter.com/{{ watched_bot }}">@{{ watched_bot }}</a> at <a href="http://www.twitter.com/{{ watched_bot }}/statuses/{{ lastUpdate['id'] }}">{{ lastUpdate['created_at'] }}</a></p>
 			</div>		
