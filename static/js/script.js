@@ -10,5 +10,5 @@ google.load("jquery", "1.6.4");
 google.setOnLoadCallback(function() {
 
 	// your fancy JS code goes here!
-
+	$(".timeago").timeago();
 });

@@ -74,7 +74,7 @@ header {
 		color: #555;
 	}
 
-#defintion_container
+#main #defintion_container
 {  
     position: relative;  
     width: 500px;  
@@ -86,7 +86,7 @@ header {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);  
 }  
 
-	#defintion_container:before, #defintion_container:after  
+	#main #defintion_container:before, #main #defintion_container:after  
 	{  
 	    position: absolute;  
 	    width: 40%;  
@@ -105,7 +105,7 @@ header {
 	    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);  
 	    z-index: -1;  
 	}  
-	#defintion_container:after  
+	#main #defintion_container:after  
 	{  
 	    left: auto;  
 	    right: 12px;  
@@ -116,21 +116,38 @@ header {
 	    transform: skew(5deg) rotate(5deg);  
 	}  
 
-		#defintion_container .defined_word {
+		#main #defintion_container .defined_word {
 			font-size: 40px;
 			margin: 0 0 25px 0;
 		}
 
-		#defintion_container .definition {
+		#main #defintion_container .definition {
 			font-style: italic;
 			margin: 0 auto 15px auto;
 		}
 
-		#defintion_container .details {
+		#main #defintion_container .details {
 			font-size: 12px;
 			margin: 60px 0 10px 0;
 		}
 
+		#main #defintion_container .pronunciation {
+			margin: 0px 0 30px 0;
+			color: #cfcfcf;
+		}
+
+			#main #defintion_container .pronunciation span.part_of_speech {
+				margin: 0 15px 0 0 ;
+			}
+
+			#main #defintion_container .pronunciation span.pronunciation_phonetic {
+				margin: 0 15px 0 0 ;
+			}
+
+
+			#main #defintion_container .pronunciation span.pronunciation_audio {
+				margin: 0 15px 0 0 ;
+			}
 
 /* footer thingss */
 
