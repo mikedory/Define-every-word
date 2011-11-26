@@ -13,25 +13,30 @@ def define_word(word):
 		body = body[2:-10]
 		lookup = ast.literal_eval(body)
 		counter = 0
+		definition_data = dict()
+		definitions = list()
+
+		# grab the pronunciation and part of speech
+		if lookup.has_key("primaries"):
+			definition_heads = lookup["primaries"]
+			terms = definition_heads[0]['terms']
+			definition_data['part_of_speech'] = terms[0]['labels']
+			definition_data['language'] = terms[1]
+			definition_data['pronunciation'] = terms[2]
+		
+		# grab all the defnitions associated with the word
 		if lookup.has_key("webDefinitions"):
-			defined_words = 
-			definition_heads = lookup["webDefinitions"][0]["headword"]
-			for head in definition_heads:	
-				if head["type"] == "meaning":
-					string = urllib.unquote(head['terms'][counter]['text'])
-					defined_words.append(string)
-					++counter
-				else:
-					pass
 			definition_entries = lookup["webDefinitions"][0]["entries"]
 			for entry in definition_entries:	
 				if entry["type"] == "meaning":
-					string = urllib.unquote(entry['terms'][counter]['text'])
-					defined_words.append(string)
+					definition_entry = urllib.unquote(entry['terms'][counter]['text'])
+					definitions.append(definition_entry)
 					++counter
 				else:
 					return "=("
-			return defined_words
+			definition_data['definitions'] = definitions
+			return definition_data
+
 	except URLError, e:
 		print e.code
 		print e.read()
