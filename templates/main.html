@@ -22,8 +22,11 @@
 		<div id="container">
 			<div id="defintion_container">
 				<p class="defined_word">{{ lastUpdate['text'] }}</p>
-
-				<p class="part_of_speech">{{ lastDefinition }}</p>
+				<div class="pronunciation">
+					<span class="part_of_speech">{{ lastDefinition['part_of_speech'] }}</span>
+					<span class="pronunciation_phonetic">{{ lastDefinition['pronunciation_phonetic'] }}</span>
+					<span class="pronunciation_audio"><a href="{{ lastDefinition['pronunciation_audio'] }}"><img src="{{ static_url("images/speaker_icon-20.png") }}" width="12px" height="12px"></a></span>
+				</div>
 				{% set counter=0 %}
 				{% for definitions in lastDefinition['definitions'] %}
 					{% set counter+=1%}
