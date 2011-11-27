@@ -24,15 +24,21 @@
 				<p class="defined_word">{{ lastUpdate['text'] }}</p>
 				<div class="pronunciation">
 					<span class="part_of_speech">
+						{% if 'part_of_speech' in lastDefinition %}
 							{{ lastDefinition['part_of_speech'] }}
+						{% end %}
 					</span>
 					<span class="pronunciation_phonetic">
-						{{ lastDefinition['pronunciation_phonetic'] }}
+						{% if 'pronunciation_phonetic' in lastDefinition %}
+							{{ lastDefinition['pronunciation_phonetic'] }}
+						{% end %}
 					</span>
 					<span class="pronunciation_audio">
+						{% if 'pronunciation_audio' in lastDefinition %}
 						<a href="{{ lastDefinition['pronunciation_audio'] }}">
 							<img src="{{ static_url("images/speaker_icon-20.png") }}" width="12px" height="12px">
 						</a>
+						{% end %}
 					</span>
 				</div>
 
