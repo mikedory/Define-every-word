@@ -10,4 +10,4 @@ Sure!  This was built with Python on Tornado using Redis as a data store and ass
 
 ## Credits
 
-I took a bunch of hints on how to do the Google dictionary parsing from a script written by [Sridarshan Shetty](http://twitter.com/sridarshan), and [Adam Parrish](http://twitter.coma/parrish)'s [Mimetree](https://github.com/aparrish/mimetree/) is a great into to Redis for this ind of stuff.
+I took a bunch of hints on how to do the Google dictionary parsing from a script written by [Sridarshan Shetty](http://twitter.com/sridarshan), and [Adam Parrish](http://twitter.coma/parrish)'s [Mimetree](https://github.com/aparrish/mimetree/) is a great into to Redis for this kind of stuff.
