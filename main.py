@@ -15,8 +15,8 @@ import tornado.web
 import unicodedata
 
 # mah files
-import tweet_grabber
-import word_grabber
+import util.tweet_grabber
+import util.word_grabber
 
 # import and define tornado-y things
 from tornado.options import define, options
