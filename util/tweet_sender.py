@@ -18,7 +18,7 @@ if os.environ.has_key('TWITTER_APP_CONSUMER_KEY'):
 else:
 	# local use, via tornado command flags
 	# run like:
-	# 	python tweet_sender.py --consumer_key=x --consumer_secret=x --oauth_token=x --token_secret=x
+	# 	python util/tweet_sender.py --consumer_key=x --consumer_secret=x --oauth_token=x --token_secret=x
 	
 	# snag off the command line
 	from tornado.options import define, options
@@ -33,6 +33,7 @@ else:
 	consumer_secret = options.consumer_secret
 	oauth_token = options.oauth_token
 	token_secret = options.token_secret
+
 
 # actually send a tweet
 def send_tweet(word, consumer_key, consumer_secret, oauth_token, token_secret):
@@ -52,7 +53,11 @@ def send_tweet(word, consumer_key, consumer_secret, oauth_token, token_secret):
 
 	# Souljaboytellem!
 	tweet_string = ("%s: a definition of sorts" % word)
-	twitter.statuses.update(status=tweet_string)
+	try:
+		twitter.statuses.update(status=tweet_string)
+	except twitter.api.TwitterHTTPError as oops:
+		print oops["details"]
+
 	time.sleep(2)
 	print "tweeted!"
 
@@ -60,15 +65,23 @@ def send_tweet(word, consumer_key, consumer_secret, oauth_token, token_secret):
 	time.sleep(2)
 	recent = twitter.statuses.user_timeline()
 	print recent[0]['text']
-	print isinstance(recent.rate_limit_remaining, int)
-	print isinstance(recent.rate_limit_reset, int)
+	
+	# rate_limiting = isinstance(recent.rate_limit_remaining, int)
+	# isinstance(recent.rate_limit_reset, int)
+	
 	print "tweet successful!"
 
 
 # run dis!
 if __name__ == "__main__":
-	tweet_attempt = send_tweet('test!', consumer_key, consumer_secret, oauth_token, token_secret)
+	# hacky way to get around the "tweet is a duplicate" issue in testing
+	import random
+	tweet = 'testing: %d' % (random.random()*1000)
+
+	# try tweeting
+	tweet_attempt = send_tweet(tweet, consumer_key, consumer_secret, oauth_token, token_secret)
 	if (tweet_attempt != ""):
 		print tweet_attempt
 	else:
 		print "ARRRRGH sorry that didn't quite work."
+
