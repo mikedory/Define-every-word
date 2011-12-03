@@ -16,7 +16,7 @@ import unicodedata
 
 # mah files
 import tweet_grabber
-import dictionary
+import word_grabber
 
 # import and define tornado-y things
 from tornado.options import define, options
@@ -69,7 +69,7 @@ class MainHandler(BaseHandler):
 		lastUpdate = json.loads(lastUpdateJSON)
 
 		# define that word!
-		lastDefinition = dictionary.define_word(lastUpdate["text"])
+		lastDefinition = word_grabber.define_word(lastUpdate["text"])
 
 		if os.environ.has_key('WATCHED_BOT'):
 			watched_bot = os.environ['WATCHED_BOT']
