@@ -8,6 +8,7 @@ import json
 import configs
 import tweet_sender
 import tweet_shortener
+import word_grabber
 
 def grab_twitter_updates():
 	from twitter import Twitter, NoAuth
@@ -75,4 +76,4 @@ def grab_all_the_things(testword=None):
 		print tweet_attempt
 		
 if __name__ == "__main__":
-	grab_all_the_things()
+	grab_all_the_things("ywp")
