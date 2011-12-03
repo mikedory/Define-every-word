@@ -54,13 +54,21 @@ def grab_all_the_things():
 
 	datters = db.get("tweets:%s" % lastUpdate["id"])
 	if datters:
+		# eh, old tweet
 		print("Same tweet. Carry on.")
 	else:
+		# it is a new tweet!
 		print("NEW TWEET!")
+		
+		# save the tweet!
 		db.set(("tweets:%s" % lastUpdate["id"]), json.dumps(lastUpdate))
 		db.lpush("tweets:tweet_ids", lastUpdate["id"])
 		db.ltrim("tweets:tweet_ids", 0, 99)
 		print("Tweet saved at %s" % datetime.datetime.now())
+
+		# tweet the tweet!
+		send_tweet()
+
 
 if __name__ == "__main__":
 	grab_all_the_things()
