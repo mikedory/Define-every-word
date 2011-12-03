@@ -56,7 +56,7 @@ def grab_all_the_things():
 	if datters:
 		# eh, old tweet
 		print("Same tweet. Carry on.")
-		send_tweet()
+		send_tweet(lastUpdate["text"])
 	else:
 		# it is a new tweet!
 		print("NEW TWEET!")
@@ -68,7 +68,7 @@ def grab_all_the_things():
 		print("Tweet saved at %s" % datetime.datetime.now())
 
 		# tweet the tweet!
-		send_tweet()
+		send_tweet(lastUpdate["text"])
 
 def send_tweet(word):
 	from twitter import Twitter, OAuth
