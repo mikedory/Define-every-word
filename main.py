@@ -69,7 +69,7 @@ class MainHandler(BaseHandler):
 		lastUpdate = json.loads(lastUpdateJSON)
 
 		# define that word!
-		lastDefinition = word_grabber.define_word(lastUpdate["text"])
+		lastDefinition = util.word_grabber.define_word(lastUpdate["text"])
 
 		if os.environ.has_key('WATCHED_BOT'):
 			watched_bot = os.environ['WATCHED_BOT']
