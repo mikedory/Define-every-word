@@ -7,6 +7,7 @@ import json
 import tornado
 from twitter import Twitter, OAuth
 
+# define the variables and stuff
 if os.environ.has_key('TWITTER_APP_CONSUMER_KEY'):
 	# heroku-styles
 	consumer_key = urlparse(os.environ.get('TWITTER_APP_CONSUMER_KEY'))
@@ -15,20 +16,25 @@ if os.environ.has_key('TWITTER_APP_CONSUMER_KEY'):
 	token_secret = urlparse(os.environ.get('TWITTER_USER_TOKEN_SECRET'))
 
 else:
-	# local use, probably
+	# local use, via tornado command flags
+	# run like:
+	# 	python tweet_sender.py --consumer_key=x --consumer_secret=x --oauth_token=x --token_secret=x
+	
+	# snag off the command line
 	from tornado.options import define, options
 	define("consumer_key", default=None, help="twitter app consumer key", type=str)
 	define("consumer_secret", default=None, help="twitter app consumer secret", type=str)
 	define("oauth_token", default=None, help="twitter app consumer key", type=str)
 	define("token_secret", default=None, help="twitter app consumer secret", type=str)
-	tornado.options.parse_command_line()
 
+	# define all the things here
+	tornado.options.parse_command_line()
 	consumer_key = options.consumer_key
 	consumer_secret = options.consumer_secret
 	oauth_token = options.oauth_token
 	token_secret = options.token_secret
 
-
+# actually send a tweet
 def send_tweet(word, consumer_key, consumer_secret, oauth_token, token_secret):
 
 	print 'trying a tweet here...'
