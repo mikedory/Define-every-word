@@ -56,6 +56,7 @@ def grab_all_the_things():
 	if datters:
 		# eh, old tweet
 		print("Same tweet. Carry on.")
+		send_tweet()
 	else:
 		# it is a new tweet!
 		print("NEW TWEET!")
