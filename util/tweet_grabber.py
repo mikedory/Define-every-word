@@ -7,19 +7,6 @@ import json
 
 import tweet_sender
 
-def get_redis_conn():
-	if os.environ.has_key('REDISTOGO_URL'):
-		url = urlparse(os.environ.get('REDISTOGO_URL'))
-		return redis.Redis(host=url.hostname, port=url.port, password=url.password)
-	else:
-		return redis.Redis(host='localhost', port=6379, db=0)
-
-def set_db_defaults(db):
-	count = db.setnx("user:checkcount",0)
-	lastcheck = db.setnx("user:lastcheck",datetime.datetime.now())
-	checks = db.setnx("checks",0)
-	return checks
-
 def grab_twitter_updates():
 	from twitter import Twitter, NoAuth
 	# twitter

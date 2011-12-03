@@ -5,38 +5,15 @@ import datetime, time
 import redis
 import json
 import tornado
+
+import configs
+import tweet_shortener
+import tweet_grabber
 from twitter import Twitter, OAuth
-
-# define the variables and stuff
-if os.environ.has_key('TWITTER_APP_CONSUMER_KEY'):
-	# heroku-styles
-	consumer_key = urlparse(os.environ.get('TWITTER_APP_CONSUMER_KEY'))
-	consumer_secret = urlparse(os.environ.get('TWITTER_APP_CONSUMER_SECRET'))
-	oauth_token = urlparse(os.environ.get('TWITTER_USER_OAUTH_TOKEN'))
-	token_secret = urlparse(os.environ.get('TWITTER_USER_TOKEN_SECRET'))
-
-else:
-	# local use, via tornado command flags
-	# run like:
-	# 	python util/tweet_sender.py --consumer_key=x --consumer_secret=x --oauth_token=x --token_secret=x
-	
-	# snag off the command line
-	from tornado.options import define, options
-	define("consumer_key", default=None, help="twitter app consumer key", type=str)
-	define("consumer_secret", default=None, help="twitter app consumer secret", type=str)
-	define("oauth_token", default=None, help="twitter app consumer key", type=str)
-	define("token_secret", default=None, help="twitter app consumer secret", type=str)
-
-	# define all the things here
-	tornado.options.parse_command_line()
-	consumer_key = options.consumer_key
-	consumer_secret = options.consumer_secret
-	oauth_token = options.oauth_token
-	token_secret = options.token_secret
 
 
 # actually send a tweet
-def send_tweet(word, consumer_key, consumer_secret, oauth_token, token_secret):
+def send_tweet(word, definition, consumer_key, consumer_secret, oauth_token, token_secret):
 
 	print 'trying a tweet here...'
 
@@ -49,10 +26,10 @@ def send_tweet(word, consumer_key, consumer_secret, oauth_token, token_secret):
 					  api_version='1')
 
 	# something about url shortening here, I guess?
-	# fancyShortner.shorten()
+	tweet_shortener.shorten(definition)
 
 	# Souljaboytellem!
-	tweet_string = ("%s: a definition of sorts" % word)
+	tweet_string = ("%s: %s" % (word, definition))
 	try:
 		twitter.statuses.update(status=tweet_string)
 	except twitter.api.TwitterHTTPError as oops:
@@ -76,10 +53,12 @@ def send_tweet(word, consumer_key, consumer_secret, oauth_token, token_secret):
 if __name__ == "__main__":
 	# hacky way to get around the "tweet is a duplicate" issue in testing
 	import random
-	tweet = 'testing: %d' % (random.random()*1000)
+	word = 'testing: %d' % (random.random()*1000)
+	definition = 'jkdsljkls'
 
 	# try tweeting
-	tweet_attempt = send_tweet(tweet, consumer_key, consumer_secret, oauth_token, token_secret)
+	vars = configs.get_twitter_vars()
+	tweet_attempt = send_tweet(word, definition, vars["consumer_key"], vars["consumer_secret"], vars["oauth_token"], vars["token_secret"])
 	if (tweet_attempt != ""):
 		print tweet_attempt
 	else:
