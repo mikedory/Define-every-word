@@ -70,10 +70,6 @@ def grab_all_the_things():
 		# tweet the tweet!
 		send_tweet()
 
-
-if __name__ == "__main__":
-	grab_all_the_things()
-
 def send_tweet(word):
 	from twitter import Twitter, OAuth
 
@@ -115,3 +111,6 @@ def send_tweet(word):
 		print isinstance(recent.rate_limit_remaining, int)
 		print isinstance(recent.rate_limit_reset, int)
 		print "tweet successful!"
+
+if __name__ == "__main__":
+	grab_all_the_things()
