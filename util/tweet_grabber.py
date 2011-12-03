@@ -5,7 +5,9 @@ import datetime, time
 import redis
 import json
 
+import configs
 import tweet_sender
+import tweet_shortener
 
 def grab_twitter_updates():
 	from twitter import Twitter, NoAuth
@@ -14,10 +16,10 @@ def grab_twitter_updates():
 	twitter_na = Twitter(domain='api.twitter.com', auth=noauth, api_version='1')
 	return twitter_na.statuses.user_timeline(screen_name="everyword")
 	
-def grab_all_the_things():
+def grab_all_the_things(testword=None):
 	# oh hai redis
-	db = get_redis_conn()
-	defaults = set_db_defaults(db)
+	db = configs.get_redis_conn()
+	defaults = configs.set_db_defaults(db)
 
 	# teh twitter
 	updates = grab_twitter_updates()
@@ -40,7 +42,11 @@ def grab_all_the_things():
 	Last update text: optioning
 	'''
 
-	datters = db.get("tweets:%s" % lastUpdate["id"])
+	if (testword != None):
+		datters = db.get("tweets:%s" % lastUpdate["id"])
+	else:
+		datters = True
+
 	if datters:
 		# eh, old tweet
 		print("Same tweet. Carry on.")
@@ -54,8 +60,18 @@ def grab_all_the_things():
 		db.ltrim("tweets:tweet_ids", 0, 99)
 		print("Tweet saved at %s" % datetime.datetime.now())
 
+		# work out the definition
+		print("defining...")
+		definitions = word_grabber.define_word(lastUpdate['text'])
+		definition = word_grabber.define_word(definitions[0])
+		short_def = tweet_shortener.shorten_definition(lastUpdate['text'], definition)
+
+		# set up the link
+		link = 'http://twitter.com/everyword/statuses/lastUpdate["id"]'
+
 		# tweet the tweet!
-		tweet_attempt = tweet_sender.send_tweet(lastUpdate["text"])
+		tweet_string = "%s: %s %s" % (lastUpdate["text"], short_def, link)
+		tweet_attempt = tweet_sender.send_tweet(tweet_string)
 		print tweet_attempt
 		
 if __name__ == "__main__":

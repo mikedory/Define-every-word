@@ -2,6 +2,7 @@
 import os.path, os, sys
 from urlparse import urlparse
 import tornado
+import redis
 
 def get_twitter_vars():
 	# define the variables and stuff
