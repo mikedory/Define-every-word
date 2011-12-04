@@ -8,7 +8,7 @@ import json
 # actually send a tweet
 def shorten_definition(word, definition):
 	# shrink to allow room for word, shortened url, and spacing
-	size = (140-19-2-len(word))
+	size = (140-19-2-3-len(word))
 	short_def = truncate(definition, size)
 	return short_def
 
