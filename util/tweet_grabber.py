@@ -11,11 +11,17 @@ import tweet_shortener
 import word_grabber
 
 def grab_twitter_updates():
-	from twitter import Twitter, NoAuth
-	# twitter
-	noauth = NoAuth()
-	twitter_na = Twitter(domain='api.twitter.com', auth=noauth, api_version='1')
-	return twitter_na.statuses.user_timeline(screen_name="everyword")
+	# tweetorz
+	from twitter import Twitter, OAuth
+	vars = configs.get_twitter_vars()
+	oauth = OAuth(vars["oauth_token"], vars["token_secret"], vars["consumer_key"], vars["consumer_secret"])
+
+	# intialize things
+	twitter = Twitter(domain='api.twitter.com',
+					  auth=oauth,
+					  api_version='1')
+
+	return twitter.statuses.user_timeline(screen_name="everyword")
 	
 def grab_all_the_things():
 	# oh hai redis
