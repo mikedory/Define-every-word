@@ -33,12 +33,12 @@ def get_twitter_vars():
 		oauth_token = options.oauth_token
 		token_secret = options.token_secret
 
-		return dict(
-			consumer_key=consumer_key,
-			consumer_secret=consumer_secret,
-			oauth_token=oauth_token,
-			token_secret=token_secret
-		)
+	return dict(
+		consumer_key=consumer_key,
+		consumer_secret=consumer_secret,
+		oauth_token=oauth_token,
+		token_secret=token_secret
+	)
 
 def get_redis_conn():
 	if os.environ.has_key('REDISTOGO_URL'):
@@ -52,6 +52,3 @@ def set_db_defaults(db):
 	lastcheck = db.setnx("user:lastcheck",datetime.datetime.now())
 	checks = db.setnx("checks",0)
 	return checks
-
-if __name__ == "__main__":
-	print get_twitter_vars()
