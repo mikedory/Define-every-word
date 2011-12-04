@@ -52,3 +52,6 @@ def set_db_defaults(db):
 	lastcheck = db.setnx("user:lastcheck",datetime.datetime.now())
 	checks = db.setnx("checks",0)
 	return checks
+
+if __name__ == "__main__":
+	print get_twitter_vars()
