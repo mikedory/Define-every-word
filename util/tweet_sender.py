@@ -44,3 +44,8 @@ def send_tweet(word, tweet_string, consumer_key, consumer_secret, oauth_token, t
 		return "failed to tweet. >_< "
 
 
+if __name__ == "__main__":
+	# manual tweet-sending override
+
+	tweeted = tweet_tweet(lastUpdate)
+	print tweeted
