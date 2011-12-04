@@ -47,5 +47,11 @@ def send_tweet(word, tweet_string, consumer_key, consumer_secret, oauth_token, t
 if __name__ == "__main__":
 	# manual tweet-sending override
 
-	tweeted = tweet_tweet(lastUpdate)
+	updates = tweet_grabber.grab_twitter_updates()
+	lastUpdate = updates[0]
+	timestampsting = lastUpdate["created_at"] + ' UTC'
+	timestamp = time.mktime(time.strptime(timestampsting,  '%a  %b %d %H:%M:%S +0000 %Y %Z'))
+	lastUpdate["timestamp"] = timestamp
+
+	tweeted = tweet_grabber.tweet_tweet(lastUpdate)
 	print tweeted
