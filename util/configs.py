@@ -9,10 +9,10 @@ def get_twitter_vars():
 	# define the variables and stuff
 	if os.environ.has_key('TWITTER_APP_CONSUMER_KEY'):
 		# heroku-styles
-		consumer_key = urlparse(os.environ.get('TWITTER_APP_CONSUMER_KEY'))
-		consumer_secret = urlparse(os.environ.get('TWITTER_APP_CONSUMER_SECRET'))
-		oauth_token = urlparse(os.environ.get('TWITTER_USER_OAUTH_TOKEN'))
-		token_secret = urlparse(os.environ.get('TWITTER_USER_TOKEN_SECRET'))
+		consumer_key = os.environ.get('TWITTER_APP_CONSUMER_KEY')
+		consumer_secret = os.environ.get('TWITTER_APP_CONSUMER_SECRET')
+		oauth_token = os.environ.get('TWITTER_USER_OAUTH_TOKEN')
+		token_secret = os.environ.get('TWITTER_USER_TOKEN_SECRET')
 
 	else:
 		# local use, via tornado command flags
