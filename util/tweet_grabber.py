@@ -93,18 +93,13 @@ def tweet_tweet(lastUpdate):
 
 	# set up the tweet string
 	tweet_string = "%s: %s %s" % (lastUpdate["text"], short_def, link)
-	print tweet_string
+	print "tweeting: %s" % tweet_string
 
 	# get the vars
 	vars = configs.get_twitter_vars()
 	tweet_attempt = tweet_sender.send_tweet(word, tweet_string, vars["consumer_key"], vars["consumer_secret"], vars["oauth_token"], vars["token_secret"])
 	return tweet_attempt	
 
-
-	# get the vars
-	vars = configs.get_twitter_vars()
-	tweet_attempt = tweet_sender.send_tweet(tweet_string, vars["consumer_key"], vars["consumer_secret"], vars["oauth_token"], vars["token_secret"])
-	return tweet_attempt	
 		
 if __name__ == "__main__":
 	grab_all_the_things(True)

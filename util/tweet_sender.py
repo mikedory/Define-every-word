@@ -38,8 +38,7 @@ def send_tweet(word, tweet_string, consumer_key, consumer_secret, oauth_token, t
 	# this is where I should probably make sure it worked, or re-loop?
 	time.sleep(2)
 	recent = twitter.statuses.user_timeline()
-	print recent[0]['text']
-	
+	# print recent[0]['text']	
 	# rate_limiting = isinstance(recent.rate_limit_remaining, int)
 	# isinstance(recent.rate_limit_reset, int)
 	
