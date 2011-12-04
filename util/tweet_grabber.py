@@ -72,8 +72,7 @@ def save_tweet(lastUpdate):
 
 def tweet_tweet(lastUpdate):
 	# work out the definition
-	print("defining...")
-	print lastUpdate['text']
+	print("defining %s..." % lastUpdate['text'])
 
 	# define things
 	definition_data = word_grabber.define_word(lastUpdate['text'])
