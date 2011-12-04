@@ -51,22 +51,23 @@ class BaseHandler(tornado.web.RequestHandler):
 
 # the main page
 class MainHandler(BaseHandler):
-	def get(self, q):
+	def get(self, def_id):
 		# yay analytics
 		if os.environ.has_key('GOOGLEANALYTICSID'):
 			google_analytics_id = os.environ['GOOGLEANALYTICSID']
 		else:
 			google_analytics_id = False
 
-		# update the twittorz
-		# just to check it's all up to date, really
-		# tweet_grabber.grab_all_the_things()
-
 		# oh hai redis
 		db = self.get_redis_conn()
-		lastTweetID = db.lindex("tweets:tweet_ids", 0)
-		lastUpdateJSON = db.get("tweets:%s" % lastTweetID)
+		
+		if def_id is not None:
+			lastUpdateJSON = db.get("tweets:%s" % def_id)
+		else: 
+			lastTweetID = db.lindex("tweets:tweet_ids", 0)
+			lastUpdateJSON = db.get("tweets:%s" % lastTweetID)
 		lastUpdate = json.loads(lastUpdateJSON)
+
 
 		# define that word!
 		lastDefinition = util.word_grabber.define_word(lastUpdate["text"])
