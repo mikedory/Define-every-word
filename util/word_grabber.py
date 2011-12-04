@@ -5,6 +5,9 @@ import ast
 
 def define_word(word):
 
+	print 'trying to define...'
+	print word
+
 	# url to snag
 	url="http://www.google.com/dictionary/json?callback=s&q="+word+"&sl=en&tl=en&restrict=pr,de&client=te"
 
@@ -31,7 +34,7 @@ def define_word(word):
 			# chunk up the data
 			definition_data['part_of_speech'] = urllib.unquote(terms[0]['labels'][0]['text'])
 			definition_data['pronunciation_phonetic'] = urllib.unquote(terms[1]['text'])
-			definition_data['pronunciation_audio'] = urllib.unquote(terms[2]['text'])
+			# definition_data['pronunciation_audio'] = urllib.unquote(terms[2]['text'])
 		
 		# grab all the defnitions associated with the word
 		if lookup.has_key("webDefinitions"):
@@ -50,7 +53,6 @@ def define_word(word):
 			# give it back
 			return definition_data
 
-	# this is kind of being handled awfully right now, I guess?
-	except URLError, e:
-		print e.code
-		print e.read()
+
+	except NameError, e:
+		print e

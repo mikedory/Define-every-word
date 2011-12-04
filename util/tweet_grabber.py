@@ -17,7 +17,7 @@ def grab_twitter_updates():
 	twitter_na = Twitter(domain='api.twitter.com', auth=noauth, api_version='1')
 	return twitter_na.statuses.user_timeline(screen_name="everyword")
 	
-def grab_all_the_things(testword=None):
+def grab_all_the_things(testword=False):
 	# oh hai redis
 	db = configs.get_redis_conn()
 	defaults = configs.set_db_defaults(db)
@@ -43,11 +43,7 @@ def grab_all_the_things(testword=None):
 	Last update text: optioning
 	'''
 
-	if (testword != None):
-		datters = db.get("tweets:%s" % lastUpdate["id"])
-	else:
-		datters = True
-
+	datters = db.get("tweets:%s" % lastUpdate["id"])
 	if datters:
 		# eh, old tweet
 		print("Same tweet. Carry on.")
@@ -55,25 +51,60 @@ def grab_all_the_things(testword=None):
 		# it is a new tweet!
 		print("NEW TWEET!")
 		
-		# save the tweet!
-		db.set(("tweets:%s" % lastUpdate["id"]), json.dumps(lastUpdate))
-		db.lpush("tweets:tweet_ids", lastUpdate["id"])
-		db.ltrim("tweets:tweet_ids", 0, 99)
-		print("Tweet saved at %s" % datetime.datetime.now())
+		saved = save_tweet(lastUpdate)
+		print saved
+		print 'Saved!'
 
-		# work out the definition
-		print("defining...")
-		definitions = word_grabber.define_word(lastUpdate['text'])
-		definition = word_grabber.define_word(definitions[0])
-		short_def = tweet_shortener.shorten_definition(lastUpdate['text'], definition)
+		tweeted = tweet_tweet(lastUpdate)
+		print tweeted
+		print "Tweeted!"
+	
+	# testing stuff
+	if (testword != False):
+		tweeted = tweet_tweet(lastUpdate)
+		print tweeted
+		print "Tweeted!"		
 
-		# set up the link
-		link = 'http://twitter.com/everyword/statuses/lastUpdate["id"]'
 
-		# tweet the tweet!
-		tweet_string = "%s: %s %s" % (lastUpdate["text"], short_def, link)
-		tweet_attempt = tweet_sender.send_tweet(tweet_string)
-		print tweet_attempt
+def save_tweet(lastUpdate):		
+	# set up the DB
+	db = configs.get_redis_conn()
+	defaults = configs.set_db_defaults(db)
+
+	# save the tweet!
+	db.set(("tweets:%s" % lastUpdate["id"]), json.dumps(lastUpdate))
+	db.lpush("tweets:tweet_ids", lastUpdate["id"])
+	# db.ltrim("tweets:tweet_ids", 0, 99)
+	return "Tweet \"%s\"saved at %s" % (lastUpdate["text"], datetime.datetime.now())
+
+def tweet_tweet(lastUpdate):
+	# work out the definition
+	print("defining...")
+	print lastUpdate['text']
+
+	# define things
+	definition_data = word_grabber.define_word(lastUpdate['text'])
+	defintition = definition_data['definitions'][0]
+	word = lastUpdate['text']
+	short_def = tweet_shortener.shorten_definition(lastUpdate['text'], definition_data['definitions'][0])
+
+	# set up the link
+	link = 'http://defineeveryword.heroku.com/%s' % lastUpdate["id"]
+
+	# set up the tweet string
+	tweet_string = "%s: %s %s" % (lastUpdate["text"], short_def, link)
+	print tweet_string
+
+	# get the vars
+	vars = configs.get_twitter_vars()
+	tweet_attempt = tweet_sender.send_tweet(word, tweet_string, vars["consumer_key"], vars["consumer_secret"], vars["oauth_token"], vars["token_secret"])
+	return tweet_attempt	
+
+
+	# get the vars
+	vars = configs.get_twitter_vars()
+	tweet_attempt = tweet_sender.send_tweet(tweet_string, vars["consumer_key"], vars["consumer_secret"], vars["oauth_token"], vars["token_secret"])
+	return tweet_attempt	
 		
 if __name__ == "__main__":
-	grab_all_the_things("ywp")
+	grab_all_the_things(True)

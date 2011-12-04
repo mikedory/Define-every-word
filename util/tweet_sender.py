@@ -7,13 +7,12 @@ import json
 import tornado
 
 import configs
-import tweet_shortener
 import tweet_grabber
 from twitter import Twitter, OAuth
 
 
 # actually send a tweet
-def send_tweet(word, definition, consumer_key, consumer_secret, oauth_token, token_secret):
+def send_tweet(word, tweet_string, consumer_key, consumer_secret, oauth_token, token_secret):
 
 	print 'trying a tweet here...'
 
@@ -25,11 +24,9 @@ def send_tweet(word, definition, consumer_key, consumer_secret, oauth_token, tok
 					  auth=oauth,
 					  api_version='1')
 
-	# something about url shortening here, I guess?
-	tweet_shortener.shorten(definition)
 
 	# Souljaboytellem!
-	tweet_string = ("%s: %s" % (word, definition))
+	print tweet_string
 	try:
 		twitter.statuses.update(status=tweet_string)
 	except twitter.api.TwitterHTTPError as oops:
@@ -53,12 +50,12 @@ def send_tweet(word, definition, consumer_key, consumer_secret, oauth_token, tok
 if __name__ == "__main__":
 	# hacky way to get around the "tweet is a duplicate" issue in testing
 	import random
-	word = 'testing: %d' % (random.random()*1000)
-	definition = 'jkdsljkls'
+	word = 'hi'
+	tweet_string = 'testing: %d' % (random.random()*1000)
 
 	# try tweeting
 	vars = configs.get_twitter_vars()
-	tweet_attempt = send_tweet(word, definition, vars["consumer_key"], vars["consumer_secret"], vars["oauth_token"], vars["token_secret"])
+	tweet_attempt = send_tweet(word, tweet_string, vars["consumer_key"], vars["consumer_secret"], vars["oauth_token"], vars["token_secret"])
 	if (tweet_attempt != ""):
 		print tweet_attempt
 	else:
