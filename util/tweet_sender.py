@@ -24,7 +24,6 @@ def send_tweet(word, tweet_string, consumer_key, consumer_secret, oauth_token, t
 					  auth=oauth,
 					  api_version='1')
 
-
 	# Souljaboytellem!
 	print tweet_string
 	try:
@@ -32,13 +31,10 @@ def send_tweet(word, tweet_string, consumer_key, consumer_secret, oauth_token, t
 	except twitter.api.TwitterHTTPError as oops:
 		print oops["details"]
 
-	time.sleep(2)
-	print "tweeted!"
-
 	# this is where I should probably make sure it worked, or re-loop?
 	time.sleep(2)
 	recent = twitter.statuses.user_timeline()
-	# print recent[0]['text']	
+
 	# rate_limiting = isinstance(recent.rate_limit_remaining, int)
 	# isinstance(recent.rate_limit_reset, int)
 	
