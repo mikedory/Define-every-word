@@ -69,7 +69,7 @@ class MainHandler(BaseHandler):
 		watched_bot = util.configs.get_watched_bot()
 
 		# analytics, eh
-		google_analytics_id = get_google_analytics_id()
+		google_analytics_id = util.configs.get_google_analytics_id()
 
 		# render it up!
 		self.render(
