@@ -48,19 +48,3 @@ def send_tweet(word, tweet_string, consumer_key, consumer_secret, oauth_token, t
 		return "failed to tweet. >_< "
 
 
-# run dis!
-if __name__ == "__main__":
-	# hacky way to get around the "tweet is a duplicate" issue in testing
-	import random
-	word = 'hi'
-	tweet_string = 'testing: %d' % (random.random()*1000)
-	print "going to try printing: %s" % tweet_string
-
-	# try tweeting
-	vars = configs.get_twitter_vars()
-	tweet_attempt = send_tweet(word, tweet_string, vars["consumer_key"], vars["consumer_secret"], vars["oauth_token"], vars["token_secret"])
-	if (tweet_attempt != ""):
-		print tweet_attempt
-	else:
-		print "ARRRRGH sorry that didn't quite work."
-
