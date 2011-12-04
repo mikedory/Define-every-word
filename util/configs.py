@@ -6,6 +6,9 @@ import redis
 import datetime, time
 
 def get_twitter_vars():
+	# for local use, via tornado command flags
+	# run like: python util/tweet_sender.py --consumer_key=x --consumer_secret=x --oauth_token=x --token_secret=x
+
 	# define the variables and stuff
 	if os.environ.has_key('TWITTER_APP_CONSUMER_KEY'):
 		# heroku-styles
@@ -13,12 +16,7 @@ def get_twitter_vars():
 		consumer_secret = os.environ.get('TWITTER_APP_CONSUMER_SECRET')
 		oauth_token = os.environ.get('TWITTER_USER_OAUTH_TOKEN')
 		token_secret = os.environ.get('TWITTER_USER_TOKEN_SECRET')
-
-	else:
-		# local use, via tornado command flags
-		# run like:
-		# 	python util/tweet_sender.py --consumer_key=x --consumer_secret=x --oauth_token=x --token_secret=x
-		
+	else:		
 		# snag off the command line
 		from tornado.options import define, options
 		define("consumer_key", default=None, help="twitter app consumer key", type=str)
@@ -52,3 +50,16 @@ def set_db_defaults(db):
 	lastcheck = db.setnx("user:lastcheck",datetime.datetime.now())
 	checks = db.setnx("checks",0)
 	return checks
+
+def get_watched_bot():
+	if os.environ.has_key('WATCHED_BOT'):
+		return os.environ['WATCHED_BOT']
+	else:
+		return options.watched_bot
+
+def get_google_analytics_id():
+	# yay analytics
+	if os.environ.has_key('GOOGLEANALYTICSID'):
+		google_analytics_id = os.environ['GOOGLEANALYTICSID']
+	else:
+		google_analytics_id = False

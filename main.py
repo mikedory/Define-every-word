@@ -52,12 +52,6 @@ class BaseHandler(tornado.web.RequestHandler):
 # the main page
 class MainHandler(BaseHandler):
 	def get(self, def_id):
-		# yay analytics
-		if os.environ.has_key('GOOGLEANALYTICSID'):
-			google_analytics_id = os.environ['GOOGLEANALYTICSID']
-		else:
-			google_analytics_id = False
-
 		# oh hai redis
 		db = self.get_redis_conn()
 		
@@ -68,14 +62,14 @@ class MainHandler(BaseHandler):
 			lastUpdateJSON = db.get("tweets:%s" % lastTweetID)
 		lastUpdate = json.loads(lastUpdateJSON)
 
-
 		# define that word!
 		lastDefinition = util.word_grabber.define_word(lastUpdate["text"])
 
-		if os.environ.has_key('WATCHED_BOT'):
-			watched_bot = os.environ['WATCHED_BOT']
-		else:
-			watched_bot = options.watched_bot
+		# which bot are we talking about, anyway?
+		watched_bot = util.configs.get_watched_bot()
+
+		# analytics, eh
+		google_analytics_id = get_google_analytics_id()
 
 		# render it up!
 		self.render(
