@@ -17,7 +17,7 @@ def grab_twitter_updates():
 	twitter_na = Twitter(domain='api.twitter.com', auth=noauth, api_version='1')
 	return twitter_na.statuses.user_timeline(screen_name="everyword")
 	
-def grab_all_the_things(testword=False):
+def grab_all_the_things():
 	# oh hai redis
 	db = configs.get_redis_conn()
 	defaults = configs.set_db_defaults(db)
@@ -52,18 +52,12 @@ def grab_all_the_things(testword=False):
 		print("NEW TWEET!")
 		
 		saved = save_tweet(lastUpdate)
-		print saved
-		print 'Saved!'
+		print 'saved!'
 
 		tweeted = tweet_tweet(lastUpdate)
-		print tweeted
-		print "Tweeted!"
-	
-	# testing stuff
-	if (testword != False):
-		tweeted = tweet_tweet(lastUpdate)
-		print tweeted
-		print "Tweeted!"		
+		print 'tweeted!'
+
+		return tweeted,saved
 
 
 def save_tweet(lastUpdate):		
@@ -102,4 +96,4 @@ def tweet_tweet(lastUpdate):
 
 		
 if __name__ == "__main__":
-	grab_all_the_things(True)
+	grab_all_the_things()
