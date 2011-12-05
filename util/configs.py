@@ -60,6 +60,6 @@ def get_watched_bot():
 def get_google_analytics_id():
 	# yay analytics
 	if os.environ.has_key('GOOGLEANALYTICSID'):
-		return = os.environ['GOOGLEANALYTICSID']
+		return os.environ['GOOGLEANALYTICSID']
 	else:
 		return False
