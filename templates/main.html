@@ -21,7 +21,7 @@
 	<div id="main">
 		<div id="container">
 			<div id="defintion_container">
-				<p class="defined_word">{{ lastUpdate['text'] }}</p>
+				<p class="defined_word">{% if 'text' in lastUpdate %}{{ lastUpdate['text'] }}{% else %} No word! {% end %}</p>
 				<div class="pronunciation">
 					<span class="part_of_speech">
 						{% if 'part_of_speech' in lastDefinition %}

@@ -26,6 +26,11 @@ define("redis_port", help="port number for redis", default=6379, type=int) # set
 define("redis_pass", help="password for redis", default=None, type=int) # set to None for local use
 define("redis_db", help="default redis db number", default=0, type=int) # set to whatever for local use
 define("watched_bot", help="the name of the bot to watch", default=None)
+define("consumer_key", default=None, help="twitter app consumer key", type=str)
+define("consumer_secret", default=None, help="twitter app consumer secret", type=str)
+define("oauth_token", default=None, help="twitter app consumer key", type=str)
+define("token_secret", default=None, help="twitter app consumer secret", type=str)
+
 
 # application settings and handle mapping info
 class Application(tornado.web.Application):
