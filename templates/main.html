@@ -21,7 +21,8 @@
 	<div id="main">
 		<div id="container">
 			<div id="defintion_container">
-				<p class="defined_word">{% if 'text' in lastUpdate %}{{ lastUpdate['text'] }}{% else %} No word! {% end %}</p>
+			{% if 'text' in lastUpdate %}
+				<p class="defined_word">{{ lastUpdate['text'] }}</p>
 				<div class="pronunciation">
 					<span class="part_of_speech">
 						{% if 'part_of_speech' in lastDefinition %}
@@ -52,6 +53,10 @@
 					<p class="definition">No definition available. =(</p>
 
 				{% end %}
+
+			{% else }
+				<p class="defined_word">No word to define. =(</p>
+			{% end %}
 				<p class="details timeago">- from <a href="http://www.twitter.com/{{ watched_bot }}">@{{ watched_bot }}</a> about <a class="timeago" href="http://www.twitter.com/{{ watched_bot }}/statuses/{{ lastUpdate['id'] }}">{{ locale.format_date(lastUpdate['timestamp'], gmt_offset=0, relative=True) }}</a></p>
 			</div>		
 		</div><!-- end container -->
