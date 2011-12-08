@@ -65,9 +65,7 @@ def grab_all_the_things():
 		tweeted = tweet_tweet(lastUpdate)
 		print 'tweeted!'
 
-	print ("--------------------------------------")
-
-	return tweeted,saved
+		return tweeted,saved
 
 
 def save_tweet(lastUpdate):		
