@@ -34,8 +34,9 @@ def define_word(word):
 			# chunk up the data
 			definition_data['part_of_speech'] = urllib.unquote(terms[0]['labels'][0]['text'])
 			definition_data['pronunciation_phonetic'] = urllib.unquote(terms[1]['text'])
-			print len(terms)
-			if (len(terms) > 1):
+			
+			# this seems wildly hacky, but it stops the audio from exploding			
+			if 2 in terms:
 				definition_data['pronunciation_audio'] = urllib.unquote(terms[2]['text'])
 			else: 
 				definition_data['pronunciation_audio'] = ""
@@ -61,4 +62,4 @@ def define_word(word):
 		print e
 
 if __name__ == "__main__":
-	define_word('hello') 
+	define_word('outbox') 
