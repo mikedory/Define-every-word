@@ -61,4 +61,4 @@ def define_word(word):
 		print e
 
 if __name__ == "__main__":
-	grab_all_the_things('hello') 
+	define_word('hello') 
