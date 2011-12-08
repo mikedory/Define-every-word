@@ -28,6 +28,8 @@ def grab_all_the_things():
 	db = configs.get_redis_conn()
 	defaults = configs.set_db_defaults(db)
 
+	print ("--------------------------------------")
+
 	# teh twitter
 	updates = grab_twitter_updates()
 	lastUpdate = updates[0]
@@ -63,7 +65,9 @@ def grab_all_the_things():
 		tweeted = tweet_tweet(lastUpdate)
 		print 'tweeted!'
 
-		return tweeted,saved
+	print ("--------------------------------------")
+
+	return tweeted,saved
 
 
 def save_tweet(lastUpdate):		
