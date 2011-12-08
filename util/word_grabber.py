@@ -59,3 +59,6 @@ def define_word(word):
 
 	except NameError, e:
 		print e
+
+if __name__ == "__main__":
+	grab_all_the_things('hello') 
