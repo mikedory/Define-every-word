@@ -44,7 +44,7 @@
 				</div>
 
 				{% set counter=0 %}
-				{% if 'definitions' in lastDefinition%}
+				{% if 'definitions' in lastDefinition %}
 					{% for definitions in lastDefinition['definitions'] %}
 						{% set counter+=1%}
 						<p class="definition">{{ counter }}: {% raw definitions %}</p>

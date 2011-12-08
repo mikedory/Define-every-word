@@ -51,7 +51,7 @@ def set_db_defaults(db):
 	checks = db.setnx("checks",0)
 	return checks
 
-def get_watched_bot():
+def get_watched_bot(options):
 	if os.environ.has_key('WATCHED_BOT'):
 		return os.environ['WATCHED_BOT']
 	else:

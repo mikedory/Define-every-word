@@ -71,7 +71,7 @@ class MainHandler(BaseHandler):
 		lastDefinition = util.word_grabber.define_word(lastUpdate["text"])
 
 		# which bot are we talking about, anyway?
-		watched_bot = util.configs.get_watched_bot()
+		watched_bot = util.configs.get_watched_bot(options)
 
 		# analytics, eh
 		google_analytics_id = util.configs.get_google_analytics_id()
