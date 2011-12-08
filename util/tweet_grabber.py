@@ -85,7 +85,7 @@ def tweet_tweet(lastUpdate):
 	# define things
 	definition_data = word_grabber.define_word(lastUpdate['text'])
 
-	if definition_data is not none:
+	if definition_data is not None:
 
 		defintition = definition_data['definitions'][0]
 		word = lastUpdate['text']
