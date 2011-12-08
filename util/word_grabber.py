@@ -40,26 +40,33 @@ def define_word(word):
 				definition_data['pronunciation_audio'] = urllib.unquote(terms[2]['text'])
 			else: 
 				definition_data['pronunciation_audio'] = ""
-		# grab all the defnitions associated with the word
-		if lookup.has_key("webDefinitions"):
-			definition_entries = lookup["webDefinitions"][0]["entries"]
-			for entry in definition_entries:	
-				if entry["type"] == "meaning":
-					definition_entry = urllib.unquote(entry['terms'][counter]['text'])
-					definitions.append(definition_entry)
-					++counter
-				else:
-					return "=("
+		
+			# grab all the defnitions associated with the word
+			if lookup.has_key("webDefinitions"):
+				definition_entries = lookup["webDefinitions"][0]["entries"]
+				for entry in definition_entries:	
+					if entry["type"] == "meaning":
+						definition_entry = urllib.unquote(entry['terms'][counter]['text'])
+						definitions.append(definition_entry)
+						++counter
+					else:
+						return "=("
 
-			# add the definitions to the data structure
-			definition_data['definitions'] = definitions
+				# add the definitions to the data structure
+				definition_data['definitions'] = definitions
 
-			# give it back
-			return definition_data
+				# give it back
+				return definition_data
+		
+		# lookup failed =(
+		else:
+			print ">_<"
+			return None
 
 
 	except NameError, e:
 		print e
 
 if __name__ == "__main__":
-	define_word('outbox') 
+	# print(define_word('outbox'))
+	print(define_word('outbroke'))

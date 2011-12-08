@@ -84,21 +84,26 @@ def tweet_tweet(lastUpdate):
 
 	# define things
 	definition_data = word_grabber.define_word(lastUpdate['text'])
-	defintition = definition_data['definitions'][0]
-	word = lastUpdate['text']
-	short_def = tweet_shortener.shorten_definition(lastUpdate['text'], definition_data['definitions'][0])
 
-	# set up the link
-	link = 'http://defineeveryword.heroku.com/%s' % lastUpdate["id"]
+	if definition_data is not none:
 
-	# set up the tweet string
-	tweet_string = "%s: %s %s" % (lastUpdate["text"], short_def, link)
-	print "tweeting: %s" % tweet_string
+		defintition = definition_data['definitions'][0]
+		word = lastUpdate['text']
+		short_def = tweet_shortener.shorten_definition(lastUpdate['text'], definition_data['definitions'][0])
 
-	# get the vars
-	vars = configs.get_twitter_vars()
-	tweet_attempt = tweet_sender.send_tweet(word, tweet_string, vars["consumer_key"], vars["consumer_secret"], vars["oauth_token"], vars["token_secret"])
-	return tweet_attempt	
+		# set up the link
+		link = 'http://defineeveryword.heroku.com/%s' % lastUpdate["id"]
+
+		# set up the tweet string
+		tweet_string = "%s: %s %s" % (lastUpdate["text"], short_def, link)
+		print "tweeting: %s" % tweet_string
+
+		# get the vars
+		vars = configs.get_twitter_vars()
+		tweet_attempt = tweet_sender.send_tweet(word, tweet_string, vars["consumer_key"], vars["consumer_secret"], vars["oauth_token"], vars["token_secret"])
+		return tweet_attempt	
+	else:
+		return "nothing to tweet =("
 
 		
 if __name__ == "__main__":
