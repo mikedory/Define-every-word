@@ -5,8 +5,8 @@ import ast
 
 def define_word(word):
 
-	print 'trying to define...'
-	print word
+	# print 'trying to define...'
+	# print word
 
 	# url to snag
 	url="http://www.google.com/dictionary/json?callback=s&q="+word+"&sl=en&tl=en&restrict=pr,de&client=te"

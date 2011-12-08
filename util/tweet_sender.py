@@ -25,7 +25,7 @@ def send_tweet(word, tweet_string, consumer_key, consumer_secret, oauth_token, t
 					  api_version='1')
 
 	# Souljaboytellem!
-	print tweet_string
+	# print tweet_string
 	try:
 		twitter.statuses.update(status=tweet_string)
 	except twitter.api.TwitterHTTPError as oops:
