@@ -31,12 +31,15 @@ def define_word(word):
 			definition_heads = lookup["primaries"]
 			terms = definition_heads[0]['terms']
 
+			print terms
+			print len(terms)
+
 			# chunk up the data
 			definition_data['part_of_speech'] = urllib.unquote(terms[0]['labels'][0]['text'])
 			definition_data['pronunciation_phonetic'] = urllib.unquote(terms[1]['text'])
 			
 			# this seems wildly hacky, but it stops the audio from exploding			
-			if 2 in terms:
+			if (len(terms) > 2):
 				definition_data['pronunciation_audio'] = urllib.unquote(terms[2]['text'])
 			else: 
 				definition_data['pronunciation_audio'] = ""
@@ -69,4 +72,5 @@ def define_word(word):
 
 if __name__ == "__main__":
 	# print(define_word('outbox'))
-	print(define_word('outbroke'))
+	# print(define_word('outbroke'))
+	print(define_word('hello'))
