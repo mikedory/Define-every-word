@@ -56,6 +56,13 @@ class BaseHandler(tornado.web.RequestHandler):
 
 # the main page
 class MainHandler(BaseHandler):
+	@tornado.web.asynchronous
+	def fetch_definition():
+		# define that word!
+		lastDefinition = util.word_grabber.define_word(lastUpdate["text"])
+		pass
+
+
 	def get(self, def_id):
 		# oh hai redis
 		db = self.get_redis_conn()
@@ -67,8 +74,6 @@ class MainHandler(BaseHandler):
 			lastUpdateJSON = db.get("tweets:%s" % lastTweetID)
 		lastUpdate = json.loads(lastUpdateJSON)
 
-		# define that word!
-		lastDefinition = util.word_grabber.define_word(lastUpdate["text"])
 
 		# which bot are we talking about, anyway?
 		watched_bot = util.configs.get_watched_bot(options)
@@ -76,6 +81,9 @@ class MainHandler(BaseHandler):
 		# analytics, eh
 		google_analytics_id = util.configs.get_google_analytics_id()
 
+		self._on_definition()
+
+	def _on_definition(self, response):
 		# render it up!
 		self.render(
 			"main.html",
@@ -84,9 +92,8 @@ class MainHandler(BaseHandler):
 			watched_bot = watched_bot,
 			lastUpdate = lastUpdate,
 			lastDefinition = lastDefinition
-		)
-
-
+		)		
+		self.finish()
 
 # RAMMING SPEEEEEEED!
 def main():

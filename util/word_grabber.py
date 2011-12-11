@@ -18,7 +18,7 @@ def define_word(word):
 
 	try:
 		# snag the JSON
-		http = tornado.httpclient.HTTPClient()
+		http = tornado.httpclient.AsyncHTTPClient()
 		response = http.fetch(url)
 
 		# thin it out, fix it up, make it valid JSON
