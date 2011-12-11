@@ -23,6 +23,7 @@
 			<div id="defintion_container">
 			{% if 'text' in lastUpdate %}
 				<p class="defined_word">{{ lastUpdate['text'] }}</p>
+				{% if lastDefinition is not None %}
 				<div class="pronunciation">
 					<span class="part_of_speech">
 						{% if 'part_of_speech' in lastDefinition %}
@@ -43,9 +44,9 @@
 					</span>
 				</div>
 
-				{% set counter=0 %}
-				{% if 'definitions' in lastDefinition %}
-					{% for definitions in lastDefinition['definitions'] %}
+					{% set counter=0 %}
+					{% if 'definitions' in lastDefinition and 'definitions' is not None %}
+						{% for definitions in lastDefinition['definitions'] %}
 						{% set counter+=1%}
 						<p class="definition">{{ counter }}: {% raw definitions %}</p>
 					{% end %}
@@ -53,10 +54,12 @@
 					<p class="definition">No definition available. =(</p>
 
 				{% end %}
-
+			{% else %}
+				<p class="definition">No definition available. =(</p>
 			{% end %}
 				<p class="details timeago">- from <a href="http://www.twitter.com/{{ watched_bot }}">@{{ watched_bot }}</a> about <a class="timeago" href="http://www.twitter.com/{{ watched_bot }}/statuses/{{ lastUpdate['id'] }}">{{ locale.format_date(lastUpdate['timestamp'], gmt_offset=0, relative=True) }}</a></p>
 			</div>		
+			{% end %}
 		</div><!-- end container -->
 	</div><!-- end main -->
 
