@@ -2,6 +2,7 @@
 import os.path, os, sys
 from urlparse import urlparse
 from datetime import datetime, date, time
+import time
 
 import json
 import redis
@@ -65,7 +66,7 @@ class MainHandler(BaseHandler):
 			if lastUpdateJSON is None:
 				lastUpdate = util.tweet_grabber.grab_twitter_updates(def_id)
 				timestampstring = lastUpdate["created_at"] + ' UTC'
-				lastUpdate['timestamp'] = mktime(strptime(timestampstring,  '%a  %b %d %H:%M:%S +0000 %Y %Z'))
+				lastUpdate['timestamp'] = time.mktime(time.strptime(timestampstring,  '%a  %b %d %H:%M:%S +0000 %Y %Z'))
 
 			else:
 				lastUpdate = json.loads(lastUpdateJSON)
