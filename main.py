@@ -59,8 +59,7 @@ class MainHandler(BaseHandler):
 	def get(self, def_id):
 		# oh hai redis
 		db = self.get_redis_conn()
-		db.ltrim("tweets:%s" % (def_id), 0, 99)
-
+		
 		if def_id is not None:
 			lastUpdateJSON = db.get("tweets:%s" % def_id)
 		else: 
