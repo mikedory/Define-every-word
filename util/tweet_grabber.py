@@ -10,7 +10,7 @@ import tweet_sender
 import tweet_shortener
 import word_grabber
 
-def grab_twitter_updates():
+def grab_twitter_updates(tweet_id=None):
 	# tweetorz
 	from twitter import Twitter, OAuth
 	vars = configs.get_twitter_vars()
@@ -20,8 +20,10 @@ def grab_twitter_updates():
 	twitter = Twitter(domain='api.twitter.com',
 					  auth=oauth,
 					  api_version='1')
-
-	return twitter.statuses.user_timeline(screen_name="everyword")
+	if id is not None:
+		return twitter.statuses.show(id=tweet_id)
+	else:
+		return twitter.statuses.user_timeline(screen_name="everyword")
 	
 def grab_all_the_things():
 	# oh hai redis
