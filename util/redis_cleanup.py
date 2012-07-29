@@ -23,6 +23,8 @@ def trim_redis_keys():
 	print "key length: %s" % len(keys)
 
 	if (len(keys) > 99):
+		keys.sort()
+		keys.reverse()
 		keys_to_delete = keys[99:len(keys)]
 		for key in keys_to_delete:
 			print ('deleting key: %s' % key)
