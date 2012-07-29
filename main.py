@@ -64,12 +64,13 @@ class MainHandler(BaseHandler):
 			lastUpdateJSON = db.get("tweets:%s" % def_id)
 			if lastUpdateJSON is None:
 				lastUpdate = util.tweet_grabber.grab_twitter_updates(def_id)
-				logging.info('last update:')
-				logging.info(lastUpdate)
+			else:
+				lastUpdate = json.loads(lastUpdateJSON)
+
 		else: 
 			lastTweetID = db.lindex("tweets:tweet_ids", 0)
 			lastUpdateJSON = db.get("tweets:%s" % lastTweetID)
-		lastUpdate = json.loads(lastUpdateJSON)
+			lastUpdate = json.loads(lastUpdateJSON)
 
 		# define that word!
 		lastDefinition = util.word_grabber.define_word(lastUpdate["text"])
