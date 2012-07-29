@@ -9,6 +9,7 @@ import configs
 import tweet_sender
 import tweet_shortener
 import word_grabber
+import redis_cleanup
 
 def grab_twitter_updates(tweet_id=None):
 	# tweetorz
