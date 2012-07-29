@@ -64,7 +64,6 @@ class MainHandler(BaseHandler):
 			lastUpdateJSON = db.get("tweets:%s" % def_id)
 		else: 
 			lastTweetID = db.lindex("tweets:tweet_ids", 0)
-			db.ltrim("tweets:%s" % (def_id), 0, 99)
 			lastUpdateJSON = db.get("tweets:%s" % lastTweetID)
 		lastUpdate = json.loads(lastUpdateJSON)
 

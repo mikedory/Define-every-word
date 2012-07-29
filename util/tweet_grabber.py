@@ -65,6 +65,9 @@ def grab_all_the_things():
 		tweeted = tweet_tweet(lastUpdate)
 		print 'tweeted!'
 
+		redis_cleanup.trim_redis_keys()
+		print 'cleaned!'
+
 		return tweeted,saved
 
 
