@@ -74,8 +74,8 @@ def save_tweet(lastUpdate):
 	defaults = configs.set_db_defaults(db)
 
 	# save the tweet!
-	db.set(("tweets:%s" % lastUpdate["id"]), json.dumps(lastUpdate))
 	db.ltrim("tweets:%s" % lastUpdate["id"], 0, 99)
+	db.set(("tweets:%s" % lastUpdate["id"]), json.dumps(lastUpdate))
 	db.lpush("tweets:tweet_ids", lastUpdate["id"])
 	return "Tweet \"%s\"saved at %s" % (lastUpdate["text"], datetime.datetime.now())
 
