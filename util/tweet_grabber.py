@@ -35,8 +35,8 @@ def grab_all_the_things():
 	# teh twitter
 	updates = grab_twitter_updates()
 	lastUpdate = updates[0]
-	timestampsting = lastUpdate["created_at"] + ' UTC'
-	timestamp = time.mktime(time.strptime(timestampsting,  '%a  %b %d %H:%M:%S +0000 %Y %Z'))
+	timestampstring = lastUpdate["created_at"] + ' UTC'
+	timestamp = time.mktime(time.strptime(timestampstring,  '%a  %b %d %H:%M:%S +0000 %Y %Z'))
 	lastUpdate["timestamp"] = timestamp
 
 	print ("Last update created_at: %s" % lastUpdate["created_at"])

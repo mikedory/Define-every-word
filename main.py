@@ -64,7 +64,9 @@ class MainHandler(BaseHandler):
 			lastUpdateJSON = db.get("tweets:%s" % def_id)
 			if lastUpdateJSON is None:
 				lastUpdate = util.tweet_grabber.grab_twitter_updates(def_id)
-				lastUpdate['timestamp'] = lastUpdate['created_at']
+				timestampstring = lastUpdate["created_at"] + ' UTC'
+				lastUpdate['timestamp'] = time.mktime(time.strptime(timestampstring,  '%a  %b %d %H:%M:%S +0000 %Y %Z'))
+
 			else:
 				lastUpdate = json.loads(lastUpdateJSON)
 
