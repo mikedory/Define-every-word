@@ -20,7 +20,7 @@ def grab_twitter_updates(tweet_id=None):
 	twitter = Twitter(domain='api.twitter.com',
 					  auth=oauth,
 					  api_version='1')
-	if id is not None:
+	if tweet_id is not None:
 		return twitter.statuses.show(id=tweet_id)
 	else:
 		return twitter.statuses.user_timeline(screen_name="everyword")
