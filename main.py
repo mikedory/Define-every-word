@@ -63,10 +63,8 @@ class MainHandler(BaseHandler):
 		if def_id is not None:
 			lastUpdateJSON = db.get("tweets:%s" % def_id)
 			if lastUpdateJSON is None:
-				updates = util.tweet_grabber.grab_twitter_updates(def_id)
-				logging.info(updates)
-				logging.info(updates[0])
-				lastUpdate = updates[0]
+				lastUpdate = util.tweet_grabber.grab_twitter_updates(def_id)
+				logging.info(lastUpdate)
 		else: 
 			lastTweetID = db.lindex("tweets:tweet_ids", 0)
 			lastUpdateJSON = db.get("tweets:%s" % lastTweetID)
