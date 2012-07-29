@@ -27,8 +27,9 @@ def trim_redis_keys():
 		keys.reverse()
 		keys_to_delete = keys[99:len(keys)]
 		for key in keys_to_delete:
-			print ('deleting key: %s' % key)
-			db.delete(key)
+			if key is not 'checks':
+				print ('deleting key: %s' % key)
+				db.delete(key)
 	else:
 		print "all good here. as you were."
 
