@@ -31,4 +31,4 @@ def trim_redis_keys():
 		print "all good here. as you were."
 
 if __name__ == "__main__":
-	cleanup_redis()
+	trim_redis_keys()
