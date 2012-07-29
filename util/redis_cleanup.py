@@ -14,7 +14,7 @@ woooo
 '''
 
 # grab a list of all keys, and delete all over 99
-def cleanup_redis():
+def trim_redis_keys():
 	db = configs.get_redis_conn()
 	keys = db.keys('*')
 
