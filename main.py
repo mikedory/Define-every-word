@@ -58,19 +58,19 @@ class BaseHandler(tornado.web.RequestHandler):
 # the main page
 class MainHandler(BaseHandler):
 	def get(self, def_id):
+
 		# oh hai redis
 		db = self.get_redis_conn()
 		
+        # if there is a tweet ID, do something with it. if not, grab the latest from the db.
 		if def_id is not None:
 			lastUpdateJSON = db.get("tweets:%s" % def_id)
 			if lastUpdateJSON is None:
 				lastUpdate = util.tweet_grabber.grab_twitter_updates(def_id)
 				timestampstring = lastUpdate["created_at"] + ' UTC'
 				lastUpdate['timestamp'] = time.mktime(time.strptime(timestampstring,  '%a  %b %d %H:%M:%S +0000 %Y %Z'))
-
 			else:
 				lastUpdate = json.loads(lastUpdateJSON)
-
 		else: 
 			lastTweetID = db.lindex("tweets:tweet_ids", 0)
 			lastUpdateJSON = db.get("tweets:%s" % lastTweetID)
@@ -94,7 +94,6 @@ class MainHandler(BaseHandler):
 			lastUpdate = lastUpdate,
 			lastDefinition = lastDefinition
 		)
-
 
 
 # RAMMING SPEEEEEEED!
