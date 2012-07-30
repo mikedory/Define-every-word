@@ -5,6 +5,7 @@ import datetime, time
 import redis
 import json
 import tornado
+from BeautifulSoup import BeautifulSoup
 
 import configs
 import tweet_grabber
@@ -12,7 +13,7 @@ from twitter import Twitter, OAuth
 
 
 # actually send a tweet
-def send_tweet(word, tweet_string, consumer_key, consumer_secret, oauth_token, token_secret):
+def send_tweet(word, orig_tweet_string, consumer_key, consumer_secret, oauth_token, token_secret):
 
 	print 'trying a tweet here...'
 
@@ -24,8 +25,11 @@ def send_tweet(word, tweet_string, consumer_key, consumer_secret, oauth_token, t
 					  auth=oauth,
 					  api_version='1')
 
+	# clean out HTML entities before trying to tweet
+	tweet_string = BeautifulSoup(orig_tweet_string, convertEntities=BeautifulSoup.HTML_ENTITIES)
+
 	# Souljaboytellem!
-	# print tweet_string
+	print ('tweet string: %s' % tweet_string)
 	try:
 		twitter.statuses.update(status=tweet_string)
 	except twitter.api.TwitterHTTPError as oops:
@@ -46,12 +50,10 @@ def send_tweet(word, tweet_string, consumer_key, consumer_secret, oauth_token, t
 
 if __name__ == "__main__":
 	# manual tweet-sending override
-
 	updates = tweet_grabber.grab_twitter_updates()
 	lastUpdate = updates[0]
 	timestampsting = lastUpdate["created_at"] + ' UTC'
 	timestamp = time.mktime(time.strptime(timestampsting,  '%a  %b %d %H:%M:%S +0000 %Y %Z'))
 	lastUpdate["timestamp"] = timestamp
-
 	tweeted = tweet_grabber.tweet_tweet(lastUpdate)
 	print tweeted
