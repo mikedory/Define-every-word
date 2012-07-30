@@ -1,19 +1,17 @@
 #!/usr/bin/env python
-import os.path, os, sys
+import os.path, os
 from urlparse import urlparse
 from datetime import datetime, date, time
 import time
-
 import json
 import redis
-import logging
 
+# tornado imports
 import tornado.escape
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
-import unicodedata
 
 # mah files
 import util.tweet_grabber
@@ -21,16 +19,16 @@ import util.word_grabber
 
 # import and define tornado-y things
 from tornado.options import define, options
-define("port", default=5000, help="run on the given port", type=int)
+define("port", default=5000, help="run on the given port", type=int) # set to 5000 for Heroku
 define("redis_host", help="hostname for redis", default="localhost", type=str) # set to localhost for local use
 define("redis_port", help="port number for redis", default=6379, type=int) # set to 6379 for local use
 define("redis_pass", help="password for redis", default=None, type=int) # set to None for local use
 define("redis_db", help="default redis db number", default=0, type=int) # set to whatever for local use
-define("watched_bot", help="the name of the bot to watch", default=None)
-define("consumer_key", default=None, help="twitter app consumer key", type=str)
-define("consumer_secret", default=None, help="twitter app consumer secret", type=str)
-define("oauth_token", default=None, help="twitter app consumer key", type=str)
-define("token_secret", default=None, help="twitter app consumer secret", type=str)
+define("watched_bot", help="the name of the bot to watch", default=None) # everyword, for our purposes
+define("consumer_key", default=None, help="twitter app consumer key", type=str) # get from twitter dev
+define("consumer_secret", default=None, help="twitter app consumer secret", type=str) # get from twitter dev
+define("oauth_token", default=None, help="twitter app consumer key", type=str) # get from twitter oauth process
+define("token_secret", default=None, help="twitter app consumer secret", type=str) # get from oauth process
 
 
 # application settings and handle mapping info
