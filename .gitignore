@@ -1,9 +1,21 @@
+# python things
 bin
 build
 include
 lib
 *.pyc
+
+# mac things
 .DS_Store
+
+# ...svn ಠ_ಠ
 .svn
+
+# redis dumps
 dump*
+
+# virtualenv
 venv
+
+# local environment files
+.env
