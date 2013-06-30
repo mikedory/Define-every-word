@@ -20,7 +20,7 @@ def grab_twitter_updates(tweet_id=None):
 	# intialize things
 	twitter = Twitter(domain='api.twitter.com',
 					  auth=oauth,
-					  api_version='1')
+					  api_version='1.1')
 	if tweet_id is not None:
 		return twitter.statuses.show(id=tweet_id)
 	else:

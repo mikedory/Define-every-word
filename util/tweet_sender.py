@@ -23,7 +23,7 @@ def send_tweet(word, orig_tweet_string, consumer_key, consumer_secret, oauth_tok
 	# intialize things
 	twitter = Twitter(domain='api.twitter.com',
 					  auth=oauth,
-					  api_version='1')
+					  api_version='1.1')
 
 	# clean out HTML entities before trying to tweet
 	tweet_string = BeautifulSoup(orig_tweet_string, convertEntities=BeautifulSoup.HTML_ENTITIES)
