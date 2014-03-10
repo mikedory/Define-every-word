@@ -1,7 +1,4 @@
-import urllib
-import tornado.auth
-import ast
-
+from wordnik import *
 
 def define_word(word):
 
@@ -70,6 +67,4 @@ def define_word(word):
         print e
 
 if __name__ == "__main__":
-    # print(define_word('outbox'))
-    # print(define_word('outbroke'))
     print(define_word('hello'))
