@@ -7,8 +7,11 @@ import datetime
 
 
 def get_twitter_vars():
-    # for local use, via tornado command flags
-    # run like: python util/tweet_sender.py --consumer_key=x --consumer_secret=x --oauth_token=x --token_secret=x
+    '''
+    for local use, via tornado command flags
+    run like: python util/tweet_sender.py --consumer_key=x --consumer_secret=x --oauth_token=x --token_secret=x
+
+    '''
 
     # define the variables and stuff
     if os.environ.has_key('TWITTER_APP_CONSUMER_KEY'):
@@ -38,6 +41,14 @@ def get_twitter_vars():
         oauth_token=oauth_token,
         token_secret=token_secret
     )
+
+
+def get_wordnik_key(options):
+    ''' a helper to get the wordnik api key '''
+    if os.environ.has_key('WORDNIK_API_KEY'):
+        return os.environ['WORDNIK_API_KEY']
+    else:
+        return options.wordnik_api_key
 
 
 def get_redis_conn():
