@@ -5,4 +5,5 @@ redis==2.7.6
 simplejson==3.3.0
 tornado==3.1
 twitter==1.10.0
+wordnik==2.1.2
 wsgiref==0.1.2
