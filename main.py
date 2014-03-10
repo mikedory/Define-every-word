@@ -29,6 +29,7 @@ define("consumer_key", default=None, help="twitter app consumer key", type=str) 
 define("consumer_secret", default=None, help="twitter app consumer secret", type=str)  # get from twitter dev
 define("oauth_token", default=None, help="twitter app consumer key", type=str)  # get from twitter oauth process
 define("token_secret", default=None, help="twitter app consumer secret", type=str)  # get from oauth process
+define("wordnik_api_key", help="the wordnik api key", default=None)  # require to talk to wordnik's api
 
 
 # application settings and handle mapping info
